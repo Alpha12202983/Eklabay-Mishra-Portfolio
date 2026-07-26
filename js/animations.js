@@ -6,21 +6,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // 1. Initialize Lenis Smooth Scroll Engine
-  let lenis;
+  // 1. Initialize Lenis Smooth Scroll Engine (Fixed single RAF loop)
+  let lenis = null;
   if (typeof Lenis !== 'undefined' && !prefersReducedMotion) {
-    lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      touchMultiplier: 1.5
-    });
+    try {
+      lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+        wheelMultiplier: 1,
+        touchMultiplier: 1.5
+      });
 
-    function raf(time) {
-      lenis.raf(time);
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
       requestAnimationFrame(raf);
+    } catch (err) {
+      console.warn("Lenis smooth scroll fallback to native scroll:", err);
     }
-    requestAnimationFrame(raf);
   }
 
   // 2. Initialize GSAP & ScrollTrigger Plugins
@@ -29,10 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (lenis) {
       lenis.on('scroll', ScrollTrigger.update);
-      gsap.ticker.add((time) => {
-        lenis.raf(time * 1000);
-      });
-      gsap.ticker.lagSmoothing(0, 0);
     }
   }
 
@@ -44,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const st = window.pageYOffset || document.documentElement.scrollTop;
     if (st > 100) {
       header.classList.add('scrolled');
-      if (st > lastScrollTop && st > 200) {
+      if (st > lastScrollTop && st > 220) {
         // Scroll Down -> Hide Header
         header.style.transform = 'translate3d(0, -100%, 0)';
       } else {
@@ -119,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const observerOptions = {
     root: null,
     rootMargin: '0px 0px -60px 0px',
-    threshold: 0.1
+    threshold: 0.08
   };
 
   const revealElements = document.querySelectorAll('.reveal-on-scroll');
@@ -132,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Animate skill progress bars inside card if present
         const progressBars = entry.target.querySelectorAll('.skill-progress-bar');
         progressBars.forEach((bar) => {
-          const targetWidth = bar.style.width;
+          const targetWidth = bar.getAttribute('data-width') || bar.style.width;
           bar.style.width = '0%';
           setTimeout(() => {
             bar.style.width = targetWidth;
@@ -235,7 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
     });
-  }, { threshold: 0.3 });
+  }, { threshold: 0.2 });
 
   sections.forEach((section) => navObserver.observe(section));
 });

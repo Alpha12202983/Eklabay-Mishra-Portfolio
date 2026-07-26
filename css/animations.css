@@ -2,6 +2,15 @@
    KEYFRAME ANIMATIONS & PARALLAX TRANSITIONS - Eklabay Mishra Portfolio
    ========================================================================== */
 
+/* Lenis Smooth Scroll Rules */
+html.lenis, html.lenis body {
+  height: auto !important;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
 /* Top Header Scroll Progress Bar */
 .scroll-progress-bar {
   position: absolute;
