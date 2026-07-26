@@ -47,7 +47,8 @@
   }
 
   .hero-stats {
-    justify-content: center;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
   }
 
   .hero-image-wrapper {
@@ -113,8 +114,8 @@
   }
 
   .hero-stats {
-    flex-wrap: wrap;
-    gap: 24px;
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
 
   .timeline::before {
