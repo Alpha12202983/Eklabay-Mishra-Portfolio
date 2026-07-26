@@ -381,34 +381,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 4000);
       }, 800);
     });
-  }
-
-  // 8. Certificate Category Filter Chips Handler
-  const certChips = document.querySelectorAll('.cert-chip');
-  const certItems = document.querySelectorAll('.cert-card-item, .featured-cert-card');
-
-  certChips.forEach(chip => {
-    chip.addEventListener('click', () => {
-      certChips.forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-
-      const filter = chip.getAttribute('data-filter');
-
-      certItems.forEach(item => {
-        const itemCategories = item.getAttribute('data-category') || '';
-        if (filter === 'all' || itemCategories.includes(filter)) {
-          item.style.display = '';
-          if (window.gsap) {
-            gsap.fromTo(item, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.4 });
-          }
-        } else {
-          item.style.display = 'none';
-        }
-      });
-    });
-  });
-
-  // 9. Floating Back to Top Button Handler
+  // 8. Floating Back to Top Button Handler
   const backToTopBtn = document.getElementById('back-to-top');
   if (backToTopBtn) {
     window.addEventListener('scroll', () => {
