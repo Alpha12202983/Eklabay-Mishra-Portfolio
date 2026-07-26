@@ -1,5 +1,5 @@
 /* ==========================================================================
-   MAIN STYLE SHEET - Eklabay Mishra Portfolio
+   MAIN STYLE SHEET - Portfolio PT
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -510,7 +510,7 @@ img {
 }
 
 /* --------------------------------------------------------------------------
-   7. Hero Section & Arched HD Picture Rendering
+   7. Hero Section & Arched HD Picture Rendering (Crystal Clear 2nd Photo)
    -------------------------------------------------------------------------- */
 .hero {
   min-height: 100vh;
@@ -609,7 +609,7 @@ img {
   letter-spacing: 0.5px;
 }
 
-/* Arched Dome Profile Card matching reference design */
+/* Arched Dome Profile Card matching 2nd clean photo reference */
 .hero-image-wrapper {
   position: relative;
   display: flex;
@@ -621,20 +621,19 @@ img {
   width: 380px;
   height: 480px;
   border-radius: 190px 190px 36px 36px;
-  padding: 10px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.03));
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow: var(--shadow-lg), var(--shadow-purple-glow);
-  backdrop-filter: blur(20px);
+  padding: 8px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 35px rgba(99, 102, 241, 0.2);
 }
 
 .profile-img-container {
   width: 100%;
   height: 100%;
-  border-radius: 180px 180px 28px 28px;
+  border-radius: 182px 182px 28px 28px;
   overflow: hidden;
   position: relative;
-  background: #0d0e15;
+  background: #0c0d14;
 }
 
 .profile-img {
@@ -671,13 +670,13 @@ img {
 }
 
 .badge-1 {
-  top: 15%;
+  top: 12%;
   left: -25px;
   border-color: rgba(99, 102, 241, 0.4);
 }
 
 .badge-2 {
-  bottom: 12%;
+  bottom: 10%;
   right: -25px;
   border-color: rgba(168, 85, 247, 0.4);
   animation-delay: -2s;
