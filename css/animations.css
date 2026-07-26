@@ -1,0 +1,103 @@
+/* ==========================================================================
+   KEYFRAME ANIMATIONS - Eklabay Mishra Portfolio
+   ========================================================================== */
+
+/* Aurora Mesh Movement */
+@keyframes auroraMove {
+  0% {
+    transform: translate(0%, 0%) rotate(0deg) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(10%, -15%) rotate(180deg) scale(1.15);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(0%, 0%) rotate(360deg) scale(1);
+    opacity: 0.5;
+  }
+}
+
+/* Glowing Border Sweep */
+@keyframes glowSweep {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Pulse Glow Effect */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+    opacity: 1;
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(168, 85, 247, 0.8);
+    opacity: 0.7;
+  }
+}
+
+/* Pulse Dot (Available Badge) */
+@keyframes pulseDot {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+/* Floating Vertical Bobbing */
+@keyframes floatY {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+/* Spin Slow */
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Shimmer Highlight */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Text Gradient Shift */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

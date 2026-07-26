@@ -1,0 +1,71 @@
+/* ==========================================================================
+   DESIGN TOKENS & VARIABLES - Eklabay Mishra Portfolio
+   ========================================================================== */
+
+:root {
+  /* Color Palette - Deep Space & Aurora Neon */
+  --bg-primary: #07080c;
+  --bg-secondary: #0d0e15;
+  --bg-tertiary: #131520;
+  --bg-card: rgba(19, 21, 32, 0.55);
+  --bg-card-hover: rgba(27, 30, 46, 0.75);
+  --bg-glass: rgba(255, 255, 255, 0.03);
+  --bg-glass-strong: rgba(255, 255, 255, 0.07);
+
+  /* Borders & Dividers */
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-color-hover: rgba(99, 102, 241, 0.35);
+  --border-glow: rgba(168, 85, 247, 0.4);
+
+  /* Primary Accent & Aurora Colors */
+  --accent-indigo: #6366f1;
+  --accent-purple: #a855f7;
+  --accent-pink: #ec4899;
+  --accent-cyan: #06b6d4;
+  --accent-emerald: #10b981;
+  --accent-amber: #f59e0b;
+
+  /* Gradients */
+  --grad-aurora: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #06b6d4 100%);
+  --grad-pink-purple: linear-gradient(135deg, #ec4899 0%, #a855f7 100%);
+  --grad-dark-card: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.01) 100%);
+  --grad-glow-radial: radial-gradient(circle, rgba(99,102,241,0.18) 0%, rgba(7,8,12,0) 70%);
+
+  /* Typography */
+  --font-heading: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Text Colors */
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-accent: #818cf8;
+
+  /* Elevation & Shadows */
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.8);
+  --shadow-glow: 0 0 30px rgba(99, 102, 241, 0.25);
+  --shadow-purple-glow: 0 0 35px rgba(168, 85, 247, 0.25);
+
+  /* Layout Spacing */
+  --header-height: 80px;
+  --container-max-width: 1280px;
+  --section-padding-y: 120px;
+
+  /* Transitions & Animation Easing */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-cubic: cubic-bezier(0.65, 0, 0.35, 1);
+  --transition-fast: 0.2s var(--ease-out-expo);
+  --transition-normal: 0.4s var(--ease-out-expo);
+  --transition-slow: 0.8s var(--ease-out-expo);
+
+  /* Z-Index Hierarchy */
+  --z-canvas: 1;
+  --z-content: 10;
+  --z-header: 100;
+  --z-cursor: 999;
+  --z-preloader: 1000;
+  --z-modal: 1001;
+}
