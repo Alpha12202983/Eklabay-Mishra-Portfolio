@@ -1,24 +1,50 @@
 /* ==========================================================================
-   KEYFRAME ANIMATIONS - Eklabay Mishra Portfolio
+   KEYFRAME ANIMATIONS & PARALLAX TRANSITIONS - Eklabay Mishra Portfolio
    ========================================================================== */
 
-/* Aurora Mesh Movement */
+/* Top Header Scroll Progress Bar */
+.scroll-progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: var(--grad-aurora);
+  box-shadow: 0 0 10px var(--accent-indigo);
+  transition: width 0.1s linear;
+  z-index: 101;
+}
+
+/* Reveal On Scroll Base State */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translate3d(0, 45px, 0);
+  transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Aurora Mesh Movement Animation */
 @keyframes auroraMove {
   0% {
-    transform: translate(0%, 0%) rotate(0deg) scale(1);
-    opacity: 0.5;
+    transform: translate3d(0%, 0%, 0) rotate(0deg) scale(1);
+    opacity: 0.2;
   }
   50% {
-    transform: translate(10%, -15%) rotate(180deg) scale(1.15);
-    opacity: 0.8;
+    transform: translate3d(8%, -12%, 0) rotate(180deg) scale(1.15);
+    opacity: 0.35;
   }
   100% {
-    transform: translate(0%, 0%) rotate(360deg) scale(1);
-    opacity: 0.5;
+    transform: translate3d(0%, 0%, 0) rotate(360deg) scale(1);
+    opacity: 0.2;
   }
 }
 
-/* Glowing Border Sweep */
+/* Glowing Border Sweep Animation */
 @keyframes glowSweep {
   0% {
     background-position: 0% 50%;
@@ -43,7 +69,7 @@
   }
 }
 
-/* Pulse Dot (Available Badge) */
+/* Pulse Dot for Available Status Badge */
 @keyframes pulseDot {
   0% {
     transform: scale(0.95);
@@ -62,14 +88,14 @@
 /* Floating Vertical Bobbing */
 @keyframes floatY {
   0%, 100% {
-    transform: translateY(0px);
+    transform: translate3d(0, 0, 0);
   }
   50% {
-    transform: translateY(-12px);
+    transform: translate3d(0, -12px, 0);
   }
 }
 
-/* Spin Slow */
+/* Spin Slow Animation */
 @keyframes spinSlow {
   from {
     transform: rotate(0deg);
@@ -79,17 +105,7 @@
   }
 }
 
-/* Shimmer Highlight */
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-/* Text Gradient Shift */
+/* Text Gradient Shift Animation */
 @keyframes gradientShift {
   0% {
     background-position: 0% 50%;
@@ -99,5 +115,37 @@
   }
   100% {
     background-position: 0% 50%;
+  }
+}
+
+/* Spotlight Follow Effect on Cards */
+.project-card::after, .service-card::after, .glass-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(99, 102, 241, 0.12), transparent 40%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.project-card:hover::after, .service-card:hover::after, .glass-card:hover::after {
+  opacity: 1;
+}
+
+/* Reduced Motion Accessibility Overrides */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .aurora-blob, .floating-badge, .status-dot {
+    animation: none !important;
+  }
+  .magnetic-btn, .project-card, .service-card, .glass-card {
+    transform: none !important;
+    transition: none !important;
   }
 }
