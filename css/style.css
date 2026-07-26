@@ -20,6 +20,7 @@ html {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 body {
@@ -28,6 +29,7 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   background: var(--bg-primary);
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 /* Custom Scrollbar */
@@ -310,7 +312,7 @@ img {
 }
 
 /* --------------------------------------------------------------------------
-   5. Header & Navigation Bar
+   5. Header, Navigation & Theme Toggle Button
    -------------------------------------------------------------------------- */
 .header {
   position: fixed;
@@ -325,7 +327,7 @@ img {
 }
 
 .header.scrolled {
-  background: rgba(7, 8, 12, 0.85);
+  background: var(--bg-card);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border-color);
@@ -360,7 +362,7 @@ img {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 28px;
   list-style: none;
 }
 
@@ -393,6 +395,35 @@ img {
   width: 100%;
 }
 
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Theme Toggle Button */
+.theme-toggle-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--bg-glass-strong);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.theme-toggle-btn:hover {
+  background: var(--accent-indigo);
+  color: #ffffff;
+  border-color: var(--accent-indigo);
+  transform: rotate(20deg) scale(1.05);
+}
+
 .nav-cta {
   padding: 10px 20px;
   border-radius: 100px;
@@ -412,6 +443,7 @@ img {
   border-color: var(--accent-indigo);
   box-shadow: var(--shadow-glow);
   transform: translateY(-2px);
+  color: #ffffff;
 }
 
 /* Mobile Nav Toggle */
@@ -473,12 +505,12 @@ img {
 .btn-secondary:hover {
   background: rgba(255, 255, 255, 0.1);
   border-color: var(--accent-indigo);
-  color: #ffffff;
+  color: var(--text-primary);
   transform: translateY(-3px);
 }
 
 /* --------------------------------------------------------------------------
-   7. Hero Section
+   7. Hero Section & HD Picture Rendering
    -------------------------------------------------------------------------- */
 .hero {
   min-height: 100vh;
@@ -577,7 +609,7 @@ img {
   letter-spacing: 0.5px;
 }
 
-/* Hero Profile Frame */
+/* High Definition Profile Card */
 .hero-image-wrapper {
   position: relative;
   display: flex;
@@ -590,8 +622,8 @@ img {
   height: 440px;
   border-radius: 28px;
   padding: 12px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02));
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.03));
+  border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: var(--shadow-lg), var(--shadow-purple-glow);
   backdrop-filter: blur(20px);
 }
@@ -602,6 +634,7 @@ img {
   border-radius: 20px;
   overflow: hidden;
   position: relative;
+  background: #0d0e15;
 }
 
 .profile-img {
@@ -609,12 +642,14 @@ img {
   height: 100%;
   object-fit: cover;
   object-position: center top;
-  filter: contrast(1.05) brightness(1.02);
+  filter: contrast(1.08) brightness(1.04) saturate(1.05);
+  image-rendering: -webkit-optimize-contrast;
   transition: transform 0.6s var(--ease-out-expo);
+  transform: translateZ(0);
 }
 
 .profile-card:hover .profile-img {
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
 
 /* Floating Tech Badges */
@@ -622,7 +657,7 @@ img {
   position: absolute;
   padding: 10px 18px;
   border-radius: 100px;
-  background: rgba(13, 14, 21, 0.85);
+  background: var(--bg-secondary);
   backdrop-filter: blur(12px);
   border: 1px solid var(--border-color);
   color: var(--text-primary);
@@ -649,7 +684,7 @@ img {
   animation-delay: -2s;
 }
 
-/* Scroll Down Indicator */
+/* Scroll Indicator */
 .scroll-indicator {
   position: absolute;
   bottom: 30px;
@@ -692,62 +727,94 @@ img {
 }
 
 /* --------------------------------------------------------------------------
-   8. About Section
+   8. Services Offered Section
    -------------------------------------------------------------------------- */
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-}
-
-.about-bio {
-  font-size: 1.1rem;
-  color: var(--text-secondary);
-  line-height: 1.8;
-  margin-bottom: 24px;
-}
-
-.strengths-grid {
+.services-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-  margin-top: 32px;
+  gap: 32px;
 }
 
-.strength-card {
-  padding: 20px;
-  background: rgba(255,255,255,0.02);
+.service-card {
+  background: var(--bg-card);
   border: 1px solid var(--border-color);
-  border-radius: 16px;
+  border-radius: 24px;
+  padding: 40px;
+  transition: all var(--transition-normal);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
 }
 
-.strength-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: rgba(99, 102, 241, 0.1);
+.service-card:hover {
+  border-color: var(--accent-indigo);
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+  transform: translateY(-6px);
+}
+
+.service-icon-box {
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  background: rgba(99, 102, 241, 0.12);
+  border: 1px solid rgba(99, 102, 241, 0.3);
   color: var(--accent-indigo);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+  font-size: 1.8rem;
+  margin-bottom: 24px;
+}
+
+.service-title {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 700;
   margin-bottom: 12px;
 }
 
-.strength-title {
-  font-family: var(--font-heading);
+.service-desc {
+  color: var(--text-secondary);
   font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 4px;
+  margin-bottom: 28px;
+  line-height: 1.6;
 }
 
-.strength-desc {
-  font-size: 0.85rem;
-  color: var(--text-muted);
+.service-preview-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.service-pill {
+  font-size: 0.82rem;
+  padding: 6px 14px;
+  border-radius: 100px;
+  background: var(--bg-glass-strong);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.service-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: var(--accent-cyan);
+  font-size: 1rem;
+  transition: gap 0.3s ease;
+}
+
+.service-card:hover .service-action-btn {
+  gap: 14px;
 }
 
 /* --------------------------------------------------------------------------
-   9. Skills Section Matrix
+   9. Skills & Tools Matrix
    -------------------------------------------------------------------------- */
 .skills-filter {
   display: flex;
@@ -778,14 +845,14 @@ img {
 
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
   gap: 20px;
 }
 
 .skill-card {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
-  border-radius: 16px;
+  border-radius: 18px;
   padding: 24px;
   display: flex;
   flex-direction: column;
@@ -822,7 +889,7 @@ img {
 }
 
 /* --------------------------------------------------------------------------
-   10. Experience & Internship Section
+   10. Experience Timeline
    -------------------------------------------------------------------------- */
 .timeline {
   position: relative;
@@ -913,7 +980,7 @@ img {
 }
 
 /* --------------------------------------------------------------------------
-   11. Projects Showcase Section
+   11. Projects Showcase
    -------------------------------------------------------------------------- */
 .projects-grid {
   display: grid;
@@ -1035,75 +1102,11 @@ img {
 }
 
 /* --------------------------------------------------------------------------
-   12. Project Detail Modal / Drawer
-   -------------------------------------------------------------------------- */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(7, 8, 12, 0.85);
-  backdrop-filter: blur(16px);
-  z-index: var(--z-modal);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.4s var(--ease-out-expo);
-  padding: 24px;
-}
-
-.modal-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.modal-container {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 28px;
-  max-width: 900px;
-  width: 100%;
-  max-height: 90vh;
-  overflow-y: auto;
-  position: relative;
-  padding: 40px;
-  box-shadow: var(--shadow-lg), var(--shadow-glow);
-  transform: scale(0.95);
-  transition: transform 0.4s var(--ease-out-expo);
-}
-
-.modal-overlay.active .modal-container {
-  transform: scale(1);
-}
-
-.modal-close-btn {
-  position: absolute;
-  top: 24px;
-  right: 24px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: var(--bg-glass-strong);
-  border: 1px solid var(--border-color);
-  color: var(--text-primary);
-  font-size: 1.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all var(--transition-fast);
-}
-
-.modal-close-btn:hover {
-  background: rgba(239, 68, 68, 0.2);
-  color: #ef4444;
-}
-
-/* --------------------------------------------------------------------------
-   13. Education & Certifications
+   12. Verified Certifications Grid
    -------------------------------------------------------------------------- */
 .certs-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
   gap: 24px;
 }
 
@@ -1112,6 +1115,9 @@ img {
   border: 1px solid var(--border-color);
   border-radius: 20px;
   padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   transition: all var(--transition-normal);
 }
 
@@ -1121,40 +1127,61 @@ img {
   transform: translateY(-4px);
 }
 
-.cert-icon {
+.cert-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.cert-badge-icon {
   width: 48px;
   height: 48px;
-  border-radius: 12px;
-  background: rgba(16, 185, 129, 0.1);
+  border-radius: 14px;
+  background: rgba(16, 185, 129, 0.12);
   color: var(--accent-emerald);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.4rem;
-  margin-bottom: 20px;
+}
+
+.cert-verify-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: var(--accent-emerald);
+  font-size: 0.82rem;
+  font-weight: 600;
+  transition: all var(--transition-fast);
+}
+
+.cert-verify-btn:hover {
+  background: var(--accent-emerald);
+  color: #ffffff;
+  transform: translateY(-2px);
 }
 
 .cert-title {
   font-family: var(--font-heading);
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   font-weight: 700;
   margin-bottom: 8px;
+  line-height: 1.35;
 }
 
-.cert-issuer {
+.cert-provider {
   color: var(--text-secondary);
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   margin-bottom: 12px;
 }
 
-.cert-date {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--text-muted);
-}
-
 /* --------------------------------------------------------------------------
-   14. Contact Section & Form
+   13. Contact Section & Social Links
    -------------------------------------------------------------------------- */
 .contact-grid {
   display: grid;
@@ -1198,6 +1225,35 @@ img {
   font-weight: 600;
   color: var(--text-primary);
   font-size: 1.05rem;
+}
+
+.contact-social-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.btn-social {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  background: var(--bg-glass-strong);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all var(--transition-fast);
+}
+
+.btn-social:hover {
+  background: var(--accent-indigo);
+  border-color: var(--accent-indigo);
+  color: #ffffff;
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-3px);
 }
 
 .contact-form {
@@ -1265,6 +1321,97 @@ img {
 .form-toast.show {
   transform: translateY(0);
   opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   14. Modal & Drawer Overlay System
+   -------------------------------------------------------------------------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 8, 12, 0.85);
+  backdrop-filter: blur(16px);
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s var(--ease-out-expo);
+  padding: 24px;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-container {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 28px;
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  padding: 40px;
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+  transform: scale(0.95);
+  transition: transform 0.4s var(--ease-out-expo);
+}
+
+.modal-overlay.active .modal-container {
+  transform: scale(1);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-glass-strong);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.modal-close-btn:hover {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+/* Services Grid Modal List */
+.service-items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.service-item-chip {
+  padding: 14px 20px;
+  border-radius: 12px;
+  background: var(--bg-glass-strong);
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+}
+
+.service-item-chip i {
+  color: var(--accent-emerald);
+  width: 18px;
+  height: 18px;
 }
 
 /* --------------------------------------------------------------------------

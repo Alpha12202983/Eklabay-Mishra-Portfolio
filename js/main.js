@@ -111,8 +111,82 @@ const PROJECTS_DATA = {
   }
 };
 
+// Detailed Services Database for Modal Drawers
+const SERVICES_DATA = {
+  analytics: {
+    title: "Data Analytics & Business Intelligence",
+    subtitle: "End-to-End Data Processing, Visualization & Predictive Insights",
+    items: [
+      "Data Cleaning & Preprocessing",
+      "Excel Dashboard Creation",
+      "Power BI Dashboard Development",
+      "SQL Data Analysis & Query Optimization",
+      "Business Reporting & Executive Insights",
+      "Data Visualization & Interactive Charts",
+      "Exploratory Data Analysis (EDA)",
+      "Predictive Analysis & Statistical Modeling",
+      "Data Entry & Automated Formatting",
+      "Business Intelligence (BI) Analysis",
+      "KPI Tracking & Metric Dashboard Development",
+      "Data Pipeline Automation",
+      "Data Migration & ETL Workflows",
+      "Market Research & Trend Analysis",
+      "Survey Data Analysis & Cohort Studies",
+      "Python Data Analysis (Pandas & NumPy)",
+      "Apache Spark / Big Data Analysis",
+      "Machine Learning Analytics & Clustering"
+    ]
+  },
+  software: {
+    title: "Software & Full Stack Development",
+    subtitle: "Custom Scalable Web Applications, Microservices & Cloud Solutions",
+    items: [
+      "Website Development & Custom Portals",
+      "Web Application Development",
+      "Frontend Development (React, ES6+, Tailwind/CSS3)",
+      "Backend Development (PHP, Node.js, Express, Python)",
+      "Full Stack Development & MVC Architectures",
+      "API Development & RESTful Integration",
+      "Database Design, Indexing & Management (MySQL, SSMS)",
+      "Software Maintenance & Performance Bug Fixing",
+      "Authentication, RBAC & Security Implementation",
+      "Website Deployment & Cloud Hosting (GitHub Pages, Vercel, Netlify)"
+    ]
+  }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Header Scrolled State & Active Nav Highlight
+
+  // 1. Light / Dark Theme Switcher
+  const themeToggleBtn = document.getElementById('theme-toggle-btn');
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+
+  if (savedTheme === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+    if (themeToggleBtn) themeToggleBtn.innerHTML = '<i data-lucide="sun"></i>';
+  } else {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    if (themeToggleBtn) themeToggleBtn.innerHTML = '<i data-lucide="moon"></i>';
+  }
+
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+
+      if (newTheme === 'light') {
+        themeToggleBtn.innerHTML = '<i data-lucide="sun"></i>';
+      } else {
+        themeToggleBtn.innerHTML = '<i data-lucide="moon"></i>';
+      }
+      lucide.createIcons();
+    });
+  }
+
+  // 2. Header Scrolled State & Active Nav Highlight
   const header = document.getElementById('header');
   const navLinks = document.querySelectorAll('.nav-link');
   const sections = document.querySelectorAll('section[id]');
@@ -141,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 2. Mobile Nav Toggle
+  // 3. Mobile Nav Toggle
   const mobileToggle = document.getElementById('mobile-nav-toggle');
   const navLinksContainer = document.getElementById('nav-links');
 
@@ -157,7 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 3. Skills Matrix Filtering
+  // 4. Skills Matrix Filtering
   const filterBtns = document.querySelectorAll('.filter-btn');
   const skillCards = document.querySelectorAll('.skill-card');
 
@@ -181,13 +255,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 4. Project Detail Modal / Drawer System
+  // 5. Project Detail Modal / Drawer System
   const modalOverlay = document.getElementById('modal-overlay');
   const modalCloseBtn = document.getElementById('modal-close-btn');
 
   function openProjectModal(key) {
     const data = PROJECTS_DATA[key];
     if (!data || !modalOverlay) return;
+
+    document.getElementById('modal-project-content').style.display = 'block';
+    document.getElementById('modal-service-content').style.display = 'none';
 
     document.getElementById('modal-title').textContent = data.title;
     document.getElementById('modal-category').textContent = `${data.category} • ${data.period}`;
@@ -207,6 +284,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     modalOverlay.classList.add('active');
     document.body.style.overflow = 'hidden';
+  }
+
+  // 6. Services Detail Modal Trigger
+  function openServiceModal(key) {
+    const data = SERVICES_DATA[key];
+    if (!data || !modalOverlay) return;
+
+    document.getElementById('modal-project-content').style.display = 'none';
+    document.getElementById('modal-service-content').style.display = 'block';
+
+    document.getElementById('service-modal-title').textContent = data.title;
+    document.getElementById('service-modal-subtitle').textContent = data.subtitle;
+
+    const container = document.getElementById('service-items-list');
+    container.innerHTML = data.items.map(item => `
+      <div class="service-item-chip">
+        <i data-lucide="check-circle-2"></i>
+        <span>${item}</span>
+      </div>
+    `).join('');
+
+    modalOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    lucide.createIcons();
   }
 
   if (modalCloseBtn && modalOverlay) {
@@ -231,7 +332,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 5. Contact Form Handler & Toast Notification
+  // Bind service card click events
+  document.querySelectorAll('[data-service-key]').forEach((card) => {
+    card.addEventListener('click', () => {
+      const key = card.getAttribute('data-service-key');
+      openServiceModal(key);
+    });
+  });
+
+  // 7. Contact Form Handler & Toast Notification
   const contactForm = document.getElementById('contact-form');
   const formToast = document.getElementById('form-toast');
 
