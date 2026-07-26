@@ -258,14 +258,14 @@ img {
 }
 
 /* --------------------------------------------------------------------------
-   4. Background Aurora Mesh & Particles
+   4. Background Aurora Mesh & Particles (Kept Behind All Content)
    -------------------------------------------------------------------------- */
 #particle-canvas {
   position: fixed;
   inset: 0;
   width: 100vw;
   height: 100vh;
-  z-index: var(--z-canvas);
+  z-index: -10;
   pointer-events: none;
 }
 
@@ -273,15 +273,15 @@ img {
   position: fixed;
   inset: 0;
   overflow: hidden;
-  z-index: var(--z-canvas);
+  z-index: -10;
   pointer-events: none;
 }
 
 .aurora-blob {
   position: absolute;
   border-radius: 50%;
-  filter: blur(120px);
-  opacity: 0.25;
+  filter: blur(140px);
+  opacity: 0.18;
   animation: auroraMove 20s infinite ease-in-out;
 }
 
@@ -510,7 +510,7 @@ img {
 }
 
 /* --------------------------------------------------------------------------
-   7. Hero Section & Arched HD Picture Rendering (Crystal Clear 2nd Photo)
+   7. Hero Section & Arched HD Profile Card (Solid Opaque - NO Color Tint Overlay)
    -------------------------------------------------------------------------- */
 .hero {
   min-height: 100vh;
@@ -518,6 +518,7 @@ img {
   display: flex;
   align-items: center;
   position: relative;
+  z-index: 5;
 }
 
 .hero-grid {
@@ -609,11 +610,12 @@ img {
   letter-spacing: 0.5px;
 }
 
-/* Arched Dome Profile Card matching 2nd clean photo reference */
+/* SOLID OPAQUE ARCHED PROFILE CARD (NO BACKDROP BLUR OR BACKGROUND COLOR TINT) */
 .hero-image-wrapper {
   position: relative;
   display: flex;
   justify-content: center;
+  z-index: 10;
 }
 
 .profile-card {
@@ -621,19 +623,20 @@ img {
   width: 380px;
   height: 480px;
   border-radius: 190px 190px 36px 36px;
-  padding: 8px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.02));
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 35px rgba(99, 102, 241, 0.2);
+  padding: 6px;
+  background: #11131f; /* Solid dark background to prevent blue background tinting */
+  border: 2px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75), 0 0 40px rgba(99, 102, 241, 0.25);
+  /* Removed backdrop-filter to eliminate background color tinting over photo */
 }
 
 .profile-img-container {
   width: 100%;
   height: 100%;
-  border-radius: 182px 182px 28px 28px;
+  border-radius: 184px 184px 30px 30px;
   overflow: hidden;
   position: relative;
-  background: #0c0d14;
+  background: #000000;
 }
 
 .profile-img {
@@ -641,6 +644,10 @@ img {
   height: 100%;
   object-fit: cover;
   object-position: center 10%;
+  display: block;
+  opacity: 1 !important;
+  mix-blend-mode: normal !important;
+  filter: none !important; /* Pure untouched original photo colors */
   image-rendering: -webkit-optimize-contrast;
   transition: transform 0.6s var(--ease-out-expo);
   transform: translateZ(0);
@@ -655,30 +662,29 @@ img {
   position: absolute;
   padding: 10px 18px;
   border-radius: 100px;
-  background: var(--bg-secondary);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--border-color);
-  color: var(--text-primary);
+  background: rgba(17, 19, 31, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
   font-size: 0.85rem;
   font-weight: 600;
   display: flex;
   align-items: center;
   gap: 8px;
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
   animation: floatY 4s infinite ease-in-out;
-  z-index: 2;
+  z-index: 20;
 }
 
 .badge-1 {
   top: 12%;
   left: -25px;
-  border-color: rgba(99, 102, 241, 0.4);
+  border-color: rgba(99, 102, 241, 0.5);
 }
 
 .badge-2 {
   bottom: 10%;
   right: -25px;
-  border-color: rgba(168, 85, 247, 0.4);
+  border-color: rgba(168, 85, 247, 0.5);
   animation-delay: -2s;
 }
 
