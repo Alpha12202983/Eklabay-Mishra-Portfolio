@@ -1,68 +1,21 @@
 /* ==========================================================================
-   GSAP + SCROLLTRIGGER + LENIS ANIMATIONS ENGINE - Eklabay Mishra Portfolio
+   LIGHTWEIGHT NATIVE SCROLL & MOTION ENGINE - Eklabay Mishra Portfolio
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // 1. Initialize High-Speed Responsive Lenis Smooth Scroll Engine
-  let lenis = null;
-  if (typeof Lenis !== 'undefined' && !prefersReducedMotion) {
-    try {
-      lenis = new Lenis({
-        duration: 0.7, // Reduced from 1.2 for faster response
-        lerp: 0.12, // Snappier interpolation
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        smoothWheel: true,
-        wheelMultiplier: 1.6, // Increased from 1.0 for quicker scroll distance
-        touchMultiplier: 2.0, // Responsive trackpad/touch scrolling
-        infinite: false
-      });
+  // 1. Native Scroll Behavior (No Lenis Virtual Lag - 100% Native Browser Response)
+  document.documentElement.style.scrollBehavior = 'smooth';
 
-      function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      }
-      requestAnimationFrame(raf);
-    } catch (err) {
-      console.warn("Lenis smooth scroll fallback to native scroll:", err);
-    }
-  }
+  // 2. High-Performance 60 FPS Native Scroll & Parallax Loop
+  let lastScrollY = window.scrollY;
+  let ticking = false;
 
-  // 2. Initialize GSAP & ScrollTrigger Plugins
-  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-    gsap.registerPlugin(ScrollTrigger);
-
-    if (lenis) {
-      lenis.on('scroll', ScrollTrigger.update);
-    }
-  }
-
-  // 3. Header Auto-Hide on Scroll Down & Reveal on Scroll Up
   const header = document.getElementById('header');
-  let lastScrollTop = 0;
-
-  window.addEventListener('scroll', () => {
-    const st = window.pageYOffset || document.documentElement.scrollTop;
-    if (st > 100) {
-      header.classList.add('scrolled');
-      if (st > lastScrollTop && st > 220) {
-        // Scroll Down -> Hide Header
-        header.style.transform = 'translate3d(0, -100%, 0)';
-      } else {
-        // Scroll Up -> Reveal Header
-        header.style.transform = 'translate3d(0, 0, 0)';
-      }
-    } else {
-      header.classList.remove('scrolled');
-      header.style.transform = 'translate3d(0, 0, 0)';
-    }
-    lastScrollTop = st <= 0 ? 0 : st;
-  }, { passive: true });
-
-  // 4. Scroll Progress Top Indicator
   let progressBar = document.getElementById('scroll-progress-bar');
+  
   if (!progressBar && header) {
     progressBar = document.createElement('div');
     progressBar.id = 'scroll-progress-bar';
@@ -70,16 +23,65 @@ document.addEventListener('DOMContentLoaded', () => {
     header.appendChild(progressBar);
   }
 
-  window.addEventListener('scroll', () => {
+  const aurora1 = document.querySelector('.aurora-1');
+  const aurora2 = document.querySelector('.aurora-2');
+  const aurora3 = document.querySelector('.aurora-3');
+  const heroContent = document.querySelector('.hero-content');
+
+  let lastScrollTop = 0;
+
+  function onNativeScroll() {
     const scrollY = window.scrollY;
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
     const scrollPercent = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
+
+    // Update Header Progress Bar
     if (progressBar) {
       progressBar.style.width = `${Math.min(scrollPercent, 100)}%`;
     }
+
+    // Auto-Hide Header on Scroll Down / Reveal on Scroll Up
+    if (header) {
+      if (scrollY > 100) {
+        header.classList.add('scrolled');
+        if (scrollY > lastScrollTop && scrollY > 200) {
+          header.style.transform = 'translate3d(0, -100%, 0)';
+        } else {
+          header.style.transform = 'translate3d(0, 0, 0)';
+        }
+      } else {
+        header.classList.remove('scrolled');
+        header.style.transform = 'translate3d(0, 0, 0)';
+      }
+    }
+    lastScrollTop = scrollY <= 0 ? 0 : scrollY;
+
+    // Parallax background blobs & hero elements (Native 60 FPS)
+    if (!prefersReducedMotion) {
+      if (aurora1) aurora1.style.transform = `translate3d(0, ${scrollY * 0.12}px, 0)`;
+      if (aurora2) aurora2.style.transform = `translate3d(0, ${scrollY * -0.08}px, 0)`;
+      if (aurora3) aurora3.style.transform = `translate3d(0, ${scrollY * 0.06}px, 0)`;
+
+      if (heroContent && scrollY < window.innerHeight) {
+        heroContent.style.opacity = `${1 - (scrollY / (window.innerHeight * 0.85))}`;
+      }
+    }
+
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    lastScrollY = window.scrollY;
+    if (!ticking) {
+      requestAnimationFrame(onNativeScroll);
+      ticking = true;
+    }
   }, { passive: true });
 
-  // 5. Typewriter Effect for Hero Subtitle
+  // Initial update
+  onNativeScroll();
+
+  // 3. Typewriter Effect for Hero Subtitle
   const typewriterText = document.getElementById('typewriter-text');
   if (typewriterText) {
     const phrases = [
@@ -118,11 +120,11 @@ document.addEventListener('DOMContentLoaded', () => {
     type();
   }
 
-  // 6. Staggered Intersection Observer Scroll Reveal Trigger
+  // 4. Instant Intersection Observer Scroll Reveal Trigger
   const observerOptions = {
     root: null,
-    rootMargin: '0px 0px -60px 0px',
-    threshold: 0.08
+    rootMargin: '0px 0px -50px 0px',
+    threshold: 0.05
   };
 
   const revealElements = document.querySelectorAll('.reveal-on-scroll');
@@ -139,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
           bar.style.width = '0%';
           setTimeout(() => {
             bar.style.width = targetWidth;
-          }, 200);
+          }, 150);
         });
 
         observer.unobserve(entry.target);
@@ -151,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
     revealObserver.observe(el);
   });
 
-  // 7. 3D Card Tilt & Mouse-Following Spotlight Glow
+  // 5. 3D Card Tilt & Mouse Spotlight (Disabled on reduced motion)
   if (!prefersReducedMotion) {
     const tiltCards = document.querySelectorAll('.project-card, .service-card, .glass-card, .skill-card, .cert-card');
 
@@ -163,8 +165,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
 
-        const rotateX = ((y - centerY) / centerY) * -6;
-        const rotateY = ((x - centerX) / centerX) * 6;
+        const rotateX = ((y - centerY) / centerY) * -5;
+        const rotateY = ((x - centerX) / centerX) * 5;
 
         card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translate3d(0, -4px, 0)`;
         card.style.setProperty('--mouse-x', `${x}px`);
@@ -177,14 +179,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 8. Magnetic Button Physics
+  // 6. Magnetic Button Physics
   const magneticBtns = document.querySelectorAll('.magnetic-btn');
   magneticBtns.forEach((btn) => {
     btn.addEventListener('mousemove', (e) => {
       const rect = btn.getBoundingClientRect();
       const x = e.clientX - rect.left - rect.width / 2;
       const y = e.clientY - rect.top - rect.height / 2;
-      btn.style.transform = `translate3d(${x * 0.28}px, ${y * 0.28}px, 0)`;
+      btn.style.transform = `translate3d(${x * 0.25}px, ${y * 0.25}px, 0)`;
     });
 
     btn.addEventListener('mouseleave', () => {
@@ -192,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 9. Number Counter Animation
+  // 7. Stat Number Counter Observer
   const statNumbers = document.querySelectorAll('.stat-number');
   const countObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach((entry) => {
@@ -202,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const prefix = target.getAttribute('data-prefix') || '';
         const suffix = target.getAttribute('data-suffix') || '';
         let current = 0;
-        const step = targetVal / 45;
+        const step = targetVal / 40;
 
         const updateCount = () => {
           current += step;
@@ -221,7 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   statNumbers.forEach((stat) => countObserver.observe(stat));
 
-  // 10. Active Navigation Section Observer
+  // 8. Active Navigation Section Observer
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-link');
 
