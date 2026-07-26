@@ -175,4 +175,18 @@
   .skills-category-card {
     padding: 24px 18px;
   }
+
+  .cert-stats-bar {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .featured-cert-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .certs-grid {
+    grid-template-columns: 1fr;
+  }
 }

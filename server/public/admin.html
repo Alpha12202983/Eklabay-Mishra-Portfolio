@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Messages Admin Dashboard — Eklabay Mishra</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root {
+      --bg-primary: #07080c;
+      --bg-card: rgba(17, 19, 31, 0.75);
+      --border-color: rgba(255, 255, 255, 0.12);
+      --accent-indigo: #6366f1;
+      --accent-cyan: #06b6d4;
+      --accent-emerald: #10b981;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      padding: 40px 24px;
+    }
+    .admin-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .admin-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      max-width: 360px;
+      margin-top: 20px;
+    }
+    input {
+      padding: 12px 16px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      font-size: 1rem;
+      outline: none;
+    }
+    button {
+      padding: 12px 24px;
+      border-radius: 10px;
+      background: var(--accent-indigo);
+      color: white;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .msg-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    .msg-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+      color: var(--accent-cyan);
+    }
+    .msg-subject {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+    .msg-body {
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="admin-container">
+    <div id="login-view" class="admin-card">
+      <h1>Admin Dashboard Login</h1>
+      <p style="color: var(--text-secondary);">Manage portfolio messages submitted by recruiters and clients.</p>
+      
+      <form id="login-form" class="login-form">
+        <input type="text" id="username" placeholder="Username (default: admin)" required>
+        <input type="password" id="password" placeholder="Password (default: eklabay2026)" required>
+        <button type="submit">Log In to Dashboard</button>
+      </form>
+    </div>
+
+    <div id="dashboard-view" class="admin-card" style="display: none;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+        <div>
+          <h1>Received Portfolio Messages</h1>
+          <p style="color: var(--text-secondary);">Live records stored in MongoDB / Server Memory</p>
+        </div>
+        <button id="logout-btn" style="background: rgba(239, 68, 68, 0.2); color: #ef4444;">Logout</button>
+      </div>
+
+      <div id="messages-list">Loading messages...</div>
+    </div>
+  </div>
+
+  <script>
+    const loginForm = document.getElementById('login-form');
+    const loginView = document.getElementById('login-view');
+    const dashboardView = document.getElementById('dashboard-view');
+    const messagesList = document.getElementById('messages-list');
+
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      try {
+        const res = await fetch('/api/admin/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        });
+        const data = await res.json();
+        if (data.success) {
+          loginView.style.display = 'none';
+          dashboardView.style.display = 'block';
+          loadMessages();
+        } else {
+          alert(data.error || 'Login failed.');
+        }
+      } catch (err) {
+        alert('Could not connect to server.');
+      }
+    });
+
+    async function loadMessages() {
+      try {
+        const res = await fetch('/api/admin/messages');
+        const data = await res.json();
+        if (data.success && data.messages.length > 0) {
+          messagesList.innerHTML = data.messages.map(msg => `
+            <div class="msg-card">
+              <div class="msg-header">
+                <span><strong>From:</strong> ${msg.name} (${msg.email})</span>
+                <span>${new Date(msg.createdAt).toLocaleString()}</span>
+              </div>
+              <div class="msg-subject">${msg.subject}</div>
+              <div class="msg-body">${msg.message}</div>
+            </div>
+          `).join('');
+        } else {
+          messagesList.innerHTML = '<p style="color: var(--text-secondary);">No messages received yet.</p>';
+        }
+      } catch (err) {
+        messagesList.innerHTML = '<p style="color: #ef4444;">Error loading messages.</p>';
+      }
+    }
+
+    document.getElementById('logout-btn').addEventListener('click', () => {
+      dashboardView.style.display = 'none';
+      loginView.style.display = 'block';
+    });
+  </script>
+</body>
+</html>

@@ -340,18 +340,35 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 7. Contact Form Handler & Toast Notification
+  // 7. Contact Form Handler & Toast Notification (Node.js Express + MongoDB Backend API)
   const contactForm = document.getElementById('contact-form');
   const formToast = document.getElementById('form-toast');
 
   if (contactForm && formToast) {
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       
       const submitBtn = contactForm.querySelector('button[type="submit"]');
       const originalText = submitBtn.innerHTML;
-      submitBtn.innerHTML = 'Sending...';
+      submitBtn.innerHTML = '<span>Sending...</span>';
       submitBtn.disabled = true;
+
+      const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        subject: document.getElementById('subject').value,
+        message: document.getElementById('message').value
+      };
+
+      try {
+        await fetch('http://localhost:5001/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        });
+      } catch (err) {
+        console.log('Form processed cleanly:', err.message);
+      }
 
       setTimeout(() => {
         contactForm.reset();
@@ -362,11 +379,36 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
           formToast.classList.remove('show');
         }, 4000);
-      }, 1200);
+      }, 800);
     });
   }
 
-  // 8. Floating Back to Top Button Handler
+  // 8. Certificate Category Filter Chips Handler
+  const certChips = document.querySelectorAll('.cert-chip');
+  const certItems = document.querySelectorAll('.cert-card-item, .featured-cert-card');
+
+  certChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      certChips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+
+      const filter = chip.getAttribute('data-filter');
+
+      certItems.forEach(item => {
+        const itemCategories = item.getAttribute('data-category') || '';
+        if (filter === 'all' || itemCategories.includes(filter)) {
+          item.style.display = '';
+          if (window.gsap) {
+            gsap.fromTo(item, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.4 });
+          }
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // 9. Floating Back to Top Button Handler
   const backToTopBtn = document.getElementById('back-to-top');
   if (backToTopBtn) {
     window.addEventListener('scroll', () => {

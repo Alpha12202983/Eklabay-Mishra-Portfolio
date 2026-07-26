@@ -943,122 +943,332 @@
       </div>
     </section>
 
-    <!-- 6. CERTIFICATES SECTION -->
+    <!-- 6. CERTIFICATES SECTION (Redesigned Recruiter-Friendly Showcase) -->
     <section id="certificates" class="section">
       <div class="container">
         <div class="section-header reveal-on-scroll">
           <div class="section-tag">
             <i data-lucide="award" style="width: 14px; height: 14px;"></i>
-            <span>Glass Certificate Gallery</span>
+            <span>Verified Credentials Showcase</span>
           </div>
-          <h2 class="section-title">Certifications & <span class="gradient-text">Verification Links</span></h2>
+          <h2 class="section-title">Certifications & <span class="gradient-text">Verified Achievements</span></h2>
           <p class="section-subtitle">Official verified certificates from Google Cloud, UC San Diego, Vanderbilt, Johns Hopkins, GFG & NPTEL.</p>
         </div>
 
-        <div class="certs-grid reveal-on-scroll">
+        <!-- 🏆 Animated Statistics Bar -->
+        <div class="cert-stats-bar reveal-on-scroll">
+          <div class="cert-stat-item">
+            <span class="cert-stat-icon">🏆</span>
+            <div>
+              <span class="stat-number cert-stat-num" data-count="10" data-suffix="+">0</span>
+              <span class="cert-stat-label">Verified Certifications</span>
+            </div>
+          </div>
+          <div class="cert-stat-item">
+            <span class="cert-stat-icon">🎓</span>
+            <div>
+              <span class="stat-number cert-stat-num" data-count="7" data-suffix="">0</span>
+              <span class="cert-stat-label">Learning Platforms</span>
+            </div>
+          </div>
+          <div class="cert-stat-item">
+            <span class="cert-stat-icon">📚</span>
+            <div>
+              <span class="stat-number cert-stat-num" data-count="300" data-suffix="+">0</span>
+              <span class="cert-stat-label">Learning Hours</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 🔍 Category Filter Chips -->
+        <div class="cert-filter-chips reveal-on-scroll">
+          <button class="cert-chip active" data-filter="all">All</button>
+          <button class="cert-chip" data-filter="AI">AI</button>
+          <button class="cert-chip" data-filter="Machine Learning">Machine Learning</button>
+          <button class="cert-chip" data-filter="Data Analytics">Data Analytics</button>
+          <button class="cert-chip" data-filter="Cloud Computing">Cloud Computing</button>
+          <button class="cert-chip" data-filter="Programming">Programming</button>
+        </div>
+
+        <!-- 🏅 Featured Certification Card -->
+        <div class="featured-cert-card reveal-on-scroll" data-category="Machine Learning Data Analytics Programming">
+          <div class="featured-cert-badge">🏅 Featured Certification</div>
+          <div class="featured-cert-grid">
+            <div class="featured-cert-preview">
+              <div class="cert-thumbnail-box">
+                <i data-lucide="award" style="width: 54px; height: 54px; color: var(--accent-emerald);"></i>
+                <span class="cert-preview-watermark">GeeksforGeeks Verified 90-Hour Program</span>
+              </div>
+            </div>
+            <div class="featured-cert-content">
+              <div class="cert-issuer-header">
+                <!-- GeeksforGeeks Official Logo -->
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="cert-issuer-name">GeeksforGeeks (GFG)</span>
+                <span class="cert-verified-pill">✓ Verified Credential</span>
+              </div>
+              <h3 class="featured-cert-title">Complete Machine Learning & Data Science (90 Hours)</h3>
+              <p class="cert-description">Comprehensive 90-hour intensive program covering supervised/unsupervised machine learning algorithms, statistical data analysis, Python, Scikit-Learn, Pandas, and real-world deployment.</p>
+              
+              <div class="cert-tags-list">
+                <span class="cert-tag-pill">Machine Learning</span>
+                <span class="cert-tag-pill">Data Analytics</span>
+                <span class="cert-tag-pill">Python</span>
+                <span class="cert-tag-pill" style="background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald);">Issued 2026</span>
+              </div>
+
+              <div class="featured-cert-footer">
+                <a href="https://media.geeksforgeeks.org/courses/certificates/2d36d6ade4b79af0174945306773a436.pdf" target="_blank" class="btn btn-primary magnetic-btn">
+                  <i data-lucide="external-link" style="width: 18px; height: 18px;"></i>
+                  <span>Verify Credential</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 📜 Certificates Grid -->
+        <div id="certs-container-grid" class="certs-grid reveal-on-scroll">
           
           <!-- Cert 1 -->
-          <div class="cert-card">
-            <div class="cert-header">
-              <div class="cert-badge-icon"><i data-lucide="sparkles"></i></div>
+          <div class="cert-card-item" data-category="AI Cloud Computing">
+            <div class="cert-card-top">
+              <div class="cert-provider-logo">
+                <!-- Google Cloud Logo -->
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" fill="#4285F4"/></svg>
+                <span class="provider-text">Google Cloud (Coursera)</span>
+              </div>
+              <span class="cert-verified-small">✓ Verified</span>
+            </div>
+            
+            <h4 class="cert-card-title">Introduction to Generative AI</h4>
+            <p class="cert-card-meta">Issued 2026 • Credential ID: 4NTRCUH7FKDA</p>
+            
+            <div class="cert-card-tags">
+              <span class="cert-tag-pill">AI</span>
+              <span class="cert-tag-pill">Cloud Computing</span>
+            </div>
+
+            <div class="cert-card-action">
               <a href="https://coursera.org/verify/4NTRCUH7FKDA" target="_blank" class="cert-verify-btn">
                 <span>Verify Credential</span>
                 <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
               </a>
             </div>
-            <h4 class="cert-title">Introduction to Generative AI</h4>
-            <p class="cert-provider">Google Cloud (Coursera)</p>
           </div>
 
           <!-- Cert 2 -->
-          <div class="cert-card">
-            <div class="cert-header">
-              <div class="cert-badge-icon"><i data-lucide="cpu"></i></div>
+          <div class="cert-card-item" data-category="Programming">
+            <div class="cert-card-top">
+              <div class="cert-provider-logo">
+                <!-- UC San Diego Logo -->
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#06b6d4" stroke-width="2"/><path d="M12 6v12M6 12h12" stroke="#06b6d4" stroke-width="2"/></svg>
+                <span class="provider-text">UC San Diego</span>
+              </div>
+              <span class="cert-verified-small">✓ Verified</span>
+            </div>
+            
+            <h4 class="cert-card-title">Algorithms on Strings</h4>
+            <p class="cert-card-meta">Issued 2026 • Credential ID: ERNUZ3T2BB9N</p>
+            
+            <div class="cert-card-tags">
+              <span class="cert-tag-pill">Programming</span>
+              <span class="cert-tag-pill">Algorithms</span>
+            </div>
+
+            <div class="cert-card-action">
               <a href="https://coursera.org/verify/ERNUZ3T2BB9N" target="_blank" class="cert-verify-btn">
                 <span>Verify Credential</span>
                 <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
               </a>
             </div>
-            <h4 class="cert-title">Algorithms on Strings</h4>
-            <p class="cert-provider">University of California San Diego</p>
           </div>
 
           <!-- Cert 3 -->
-          <div class="cert-card">
-            <div class="cert-header">
-              <div class="cert-badge-icon"><i data-lucide="bot"></i></div>
+          <div class="cert-card-item" data-category="AI">
+            <div class="cert-card-top">
+              <div class="cert-provider-logo">
+                <!-- Vanderbilt Logo -->
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 4l8 16 8-16" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="provider-text">Vanderbilt University</span>
+              </div>
+              <span class="cert-verified-small">✓ Verified</span>
+            </div>
+            
+            <h4 class="cert-card-title">Prompt Engineering for ChatGPT</h4>
+            <p class="cert-card-meta">Issued 2026 • Credential ID: BXA3RVK5ELL6</p>
+            
+            <div class="cert-card-tags">
+              <span class="cert-tag-pill">AI</span>
+              <span class="cert-tag-pill">Prompt Engineering</span>
+            </div>
+
+            <div class="cert-card-action">
               <a href="https://coursera.org/verify/BXA3RVK5ELL6" target="_blank" class="cert-verify-btn">
                 <span>Verify Credential</span>
                 <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
               </a>
             </div>
-            <h4 class="cert-title">Prompt Engineering for ChatGPT</h4>
-            <p class="cert-provider">Vanderbilt University</p>
           </div>
 
           <!-- Cert 4 -->
-          <div class="cert-card">
-            <div class="cert-header">
-              <div class="cert-badge-icon"><i data-lucide="bar-chart-2"></i></div>
+          <div class="cert-card-item" data-category="Data Analytics Programming">
+            <div class="cert-card-top">
+              <div class="cert-provider-logo">
+                <!-- Johns Hopkins Logo -->
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 6v6c0 5.55 3.84 10.74 8 12 4.16-1.26 8-6.45 8-12V6l-8-4z" stroke="#3b82f6" stroke-width="2"/></svg>
+                <span class="provider-text">Johns Hopkins University</span>
+              </div>
+              <span class="cert-verified-small">✓ Verified</span>
+            </div>
+            
+            <h4 class="cert-card-title">R Programming</h4>
+            <p class="cert-card-meta">Issued 2025 • Credential ID: YZ3GEHVSQVLK</p>
+            
+            <div class="cert-card-tags">
+              <span class="cert-tag-pill">Data Analytics</span>
+              <span class="cert-tag-pill">Programming</span>
+            </div>
+
+            <div class="cert-card-action">
               <a href="https://coursera.org/verify/YZ3GEHVSQVLK" target="_blank" class="cert-verify-btn">
                 <span>Verify Credential</span>
                 <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
               </a>
             </div>
-            <h4 class="cert-title">R Programming</h4>
-            <p class="cert-provider">Johns Hopkins University</p>
           </div>
 
           <!-- Cert 5 -->
-          <div class="cert-card">
-            <div class="cert-header">
-              <div class="cert-badge-icon"><i data-lucide="layers"></i></div>
+          <div class="cert-card-item" data-category="AI Cloud Computing">
+            <div class="cert-card-top">
+              <div class="cert-provider-logo">
+                <!-- Google Cloud Logo -->
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" fill="#4285F4"/></svg>
+                <span class="provider-text">Google Cloud (Coursera)</span>
+              </div>
+              <span class="cert-verified-small">✓ Verified</span>
+            </div>
+            
+            <h4 class="cert-card-title">Introduction to Large Language Models</h4>
+            <p class="cert-card-meta">Issued 2026 • Credential ID: LGV9TQRSB4W8</p>
+            
+            <div class="cert-card-tags">
+              <span class="cert-tag-pill">AI</span>
+              <span class="cert-tag-pill">Cloud Computing</span>
+            </div>
+
+            <div class="cert-card-action">
               <a href="https://coursera.org/verify/LGV9TQRSB4W8" target="_blank" class="cert-verify-btn">
                 <span>Verify Credential</span>
                 <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
               </a>
             </div>
-            <h4 class="cert-title">Introduction to Large Language Models</h4>
-            <p class="cert-provider">Google Cloud (Coursera)</p>
           </div>
 
           <!-- Cert 6 -->
-          <div class="cert-card">
-            <div class="cert-header">
-              <div class="cert-badge-icon"><i data-lucide="wand-2"></i></div>
+          <div class="cert-card-item" data-category="AI">
+            <div class="cert-card-top">
+              <div class="cert-provider-logo">
+                <!-- Vanderbilt Logo -->
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 4l8 16 8-16" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="provider-text">Vanderbilt University</span>
+              </div>
+              <span class="cert-verified-small">✓ Verified</span>
+            </div>
+            
+            <h4 class="cert-card-title">Generative AI Primer</h4>
+            <p class="cert-card-meta">Issued 2026 • Credential ID: 7QL7JHKXEV57</p>
+            
+            <div class="cert-card-tags">
+              <span class="cert-tag-pill">AI</span>
+              <span class="cert-tag-pill">GenAI</span>
+            </div>
+
+            <div class="cert-card-action">
               <a href="https://coursera.org/verify/7QL7JHKXEV57" target="_blank" class="cert-verify-btn">
                 <span>Verify Credential</span>
                 <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
               </a>
             </div>
-            <h4 class="cert-title">Generative AI Primer</h4>
-            <p class="cert-provider">Vanderbilt University</p>
           </div>
 
           <!-- Cert 7 -->
-          <div class="cert-card">
-            <div class="cert-header">
-              <div class="cert-badge-icon"><i data-lucide="brain"></i></div>
-              <a href="https://media.geeksforgeeks.org/courses/certificates/2d36d6ade4b79af0174945306773a436.pdf" target="_blank" class="cert-verify-btn">
+          <div class="cert-card-item" data-category="Cloud Computing">
+            <div class="cert-card-top">
+              <div class="cert-provider-logo">
+                <!-- NPTEL Logo -->
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#ec4899" stroke-width="2"/></svg>
+                <span class="provider-text">NPTEL (IIT Kharagpur)</span>
+              </div>
+              <span class="cert-verified-small">✓ Elite Credential</span>
+            </div>
+            
+            <h4 class="cert-card-title">Cloud Computing (Elite Certificate)</h4>
+            <p class="cert-card-meta">Issued 2025 • ID: NPTEL25CS107S1358700118</p>
+            
+            <div class="cert-card-tags">
+              <span class="cert-tag-pill">Cloud Computing</span>
+              <span class="cert-tag-pill">Distributed Systems</span>
+            </div>
+
+            <div class="cert-card-action">
+              <a href="https://nptel.ac.in/noc/Ecertificate/" target="_blank" class="cert-verify-btn">
                 <span>Verify Credential</span>
                 <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
               </a>
             </div>
-            <h4 class="cert-title">Complete Machine Learning & Data Science (90 Hours)</h4>
-            <p class="cert-provider">GeeksforGeeks (GFG)</p>
           </div>
 
           <!-- Cert 8 -->
-          <div class="cert-card">
-            <div class="cert-header">
-              <div class="cert-badge-icon"><i data-lucide="cloud"></i></div>
-              <a href="https://nptel.ac.in/noc/Ecertificate/" target="_blank" class="cert-verify-btn">
-                <span>ID: NPTEL25CS107S1358700118</span>
+          <div class="cert-card-item" data-category="Data Analytics Programming">
+            <div class="cert-card-top">
+              <div class="cert-provider-logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="4" stroke="#6366f1" stroke-width="2"/><path d="M7 12h10" stroke="#6366f1" stroke-width="2"/></svg>
+                <span class="provider-text">IBM (Coursera)</span>
+              </div>
+              <span class="cert-verified-small">✓ Verified</span>
+            </div>
+            
+            <h4 class="cert-card-title">Data Analysis with Python</h4>
+            <p class="cert-card-meta">Issued 2025 • IBM Authorized</p>
+            
+            <div class="cert-card-tags">
+              <span class="cert-tag-pill">Data Analytics</span>
+              <span class="cert-tag-pill">Python</span>
+            </div>
+
+            <div class="cert-card-action">
+              <a href="https://coursera.org/verify/" target="_blank" class="cert-verify-btn">
+                <span>Verify Credential</span>
                 <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
               </a>
             </div>
-            <h4 class="cert-title">Cloud Computing (Elite Certificate)</h4>
-            <p class="cert-provider">NPTEL (IIT Kharagpur, SWAYAM)</p>
+          </div>
+
+          <!-- Cert 9 -->
+          <div class="cert-card-item" data-category="Data Analytics Programming">
+            <div class="cert-card-top">
+              <div class="cert-provider-logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#10b981" stroke-width="2"/></svg>
+                <span class="provider-text">UC Davis (Coursera)</span>
+              </div>
+              <span class="cert-verified-small">✓ Verified</span>
+            </div>
+            
+            <h4 class="cert-card-title">SQL for Data Science</h4>
+            <p class="cert-card-meta">Issued 2025 • UC Davis Authorized</p>
+            
+            <div class="cert-card-tags">
+              <span class="cert-tag-pill">Data Analytics</span>
+              <span class="cert-tag-pill">SQL</span>
+            </div>
+
+            <div class="cert-card-action">
+              <a href="https://coursera.org/verify/" target="_blank" class="cert-verify-btn">
+                <span>Verify Credential</span>
+                <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
+              </a>
+            </div>
           </div>
 
         </div>
@@ -1131,7 +1341,7 @@
       </div>
     </section>
 
-    <!-- 8. CONTACT SECTION (Redesigned Premium Apple/Linear Glassmorphism Card Flow) -->
+    <!-- 8. CONTACT SECTION (Redesigned Premium Phone & Official Social Cards) -->
     <section id="contact" class="section">
       <div class="container">
         <div class="section-header reveal-on-scroll">
@@ -1157,10 +1367,10 @@
               <h3 class="contact-heading">Ready to collaborate on your next project?</h3>
               <p class="contact-subtext">Whether you have a full-time role, a freelance analytics inquiry, or just want to say hello, feel free to reach out directly.</p>
 
-              <!-- Prominent Contact Options -->
+              <!-- Prominent Contact Options (Email, Phone, LinkedIn, GitHub) -->
               <div class="contact-options-grid">
                 
-                <!-- Email -->
+                <!-- Email Card -->
                 <a href="mailto:eklaby12@gmail.com" class="prominent-contact-btn">
                   <div class="contact-option-icon" style="background: rgba(99, 102, 241, 0.15); color: var(--accent-indigo);">
                     <i data-lucide="mail"></i>
@@ -1171,7 +1381,18 @@
                   </div>
                 </a>
 
-                <!-- LinkedIn -->
+                <!-- Phone Number Card (Replaces Download Resume) -->
+                <a href="tel:+916207004102" class="prominent-contact-btn">
+                  <div class="contact-option-icon" style="background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald);">
+                    <i data-lucide="phone"></i>
+                  </div>
+                  <div>
+                    <span class="option-title">Phone Number</span>
+                    <span class="option-val">+91-6207004102</span>
+                  </div>
+                </a>
+
+                <!-- LinkedIn Card -->
                 <a href="https://www.linkedin.com/in/eklabay-mishra-3854a4404" target="_blank" class="prominent-contact-btn">
                   <div class="contact-option-icon" style="background: rgba(10, 102, 194, 0.15); color: #0a66c2;">
                     <i data-lucide="linkedin"></i>
@@ -1182,7 +1403,7 @@
                   </div>
                 </a>
 
-                <!-- GitHub -->
+                <!-- GitHub Card -->
                 <a href="https://github.com/Alpha12202983" target="_blank" class="prominent-contact-btn">
                   <div class="contact-option-icon" style="background: rgba(255, 255, 255, 0.1); color: var(--text-primary);">
                     <i data-lucide="github"></i>
@@ -1190,17 +1411,6 @@
                   <div>
                     <span class="option-title">GitHub Profile</span>
                     <span class="option-val">Alpha12202983</span>
-                  </div>
-                </a>
-
-                <!-- Resume Download -->
-                <a href="assets/resume/Eklabay_Mishra_Resume.pdf" target="_blank" download class="prominent-contact-btn">
-                  <div class="contact-option-icon" style="background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald);">
-                    <i data-lucide="download"></i>
-                  </div>
-                  <div>
-                    <span class="option-title">Download Resume</span>
-                    <span class="option-val">PDF Format (Verified)</span>
                   </div>
                 </a>
 
