@@ -1,13 +1,64 @@
 /* ==========================================================================
-   AWWWARDS-GRADE MOTION ENGINE & PARALLAX SCROLL - Eklabay Mishra Portfolio
+   GSAP + SCROLLTRIGGER + LENIS ANIMATIONS ENGINE - Eklabay Mishra Portfolio
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // 1. Scroll Progress Bar Top Indicator
+  // 1. Initialize Lenis Smooth Scroll Engine
+  let lenis;
+  if (typeof Lenis !== 'undefined' && !prefersReducedMotion) {
+    lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      touchMultiplier: 1.5
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+  }
+
+  // 2. Initialize GSAP & ScrollTrigger Plugins
+  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+
+    if (lenis) {
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+      });
+      gsap.ticker.lagSmoothing(0, 0);
+    }
+  }
+
+  // 3. Header Auto-Hide on Scroll Down & Reveal on Scroll Up
   const header = document.getElementById('header');
+  let lastScrollTop = 0;
+
+  window.addEventListener('scroll', () => {
+    const st = window.pageYOffset || document.documentElement.scrollTop;
+    if (st > 100) {
+      header.classList.add('scrolled');
+      if (st > lastScrollTop && st > 200) {
+        // Scroll Down -> Hide Header
+        header.style.transform = 'translate3d(0, -100%, 0)';
+      } else {
+        // Scroll Up -> Reveal Header
+        header.style.transform = 'translate3d(0, 0, 0)';
+      }
+    } else {
+      header.classList.remove('scrolled');
+      header.style.transform = 'translate3d(0, 0, 0)';
+    }
+    lastScrollTop = st <= 0 ? 0 : st;
+  }, { passive: true });
+
+  // 4. Scroll Progress Top Indicator
   let progressBar = document.getElementById('scroll-progress-bar');
   if (!progressBar && header) {
     progressBar = document.createElement('div');
@@ -16,73 +67,23 @@ document.addEventListener('DOMContentLoaded', () => {
     header.appendChild(progressBar);
   }
 
-  // 2. High-Performance 60 FPS Parallax & Scroll Engine
-  let lastScrollY = window.scrollY;
-  let ticking = false;
-
-  const aurora1 = document.querySelector('.aurora-1');
-  const aurora2 = document.querySelector('.aurora-2');
-  const aurora3 = document.querySelector('.aurora-3');
-  const heroContent = document.querySelector('.hero-content');
-  const heroImageWrapper = document.querySelector('.hero-image-wrapper');
-
-  function updateParallax() {
+  window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
     const scrollPercent = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
-
-    // Update progress bar width
     if (progressBar) {
       progressBar.style.width = `${Math.min(scrollPercent, 100)}%`;
     }
-
-    // Header glass shrink on scroll
-    if (header) {
-      if (scrollY > 50) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    }
-
-    // Parallax background blobs & hero elements (disabled if prefersReducedMotion)
-    if (!prefersReducedMotion) {
-      if (aurora1) aurora1.style.transform = `translate3d(0, ${scrollY * 0.15}px, 0)`;
-      if (aurora2) aurora2.style.transform = `translate3d(0, ${scrollY * -0.1}px, 0)`;
-      if (aurora3) aurora3.style.transform = `translate3d(0, ${scrollY * 0.08}px, 0)`;
-
-      if (heroContent && scrollY < window.innerHeight) {
-        heroContent.style.transform = `translate3d(0, ${scrollY * 0.12}px, 0)`;
-        heroContent.style.opacity = `${1 - (scrollY / (window.innerHeight * 0.85))}`;
-      }
-
-      if (heroImageWrapper && scrollY < window.innerHeight) {
-        heroImageWrapper.style.transform = `translate3d(0, ${scrollY * 0.06}px, 0)`;
-      }
-    }
-
-    ticking = false;
-  }
-
-  window.addEventListener('scroll', () => {
-    lastScrollY = window.scrollY;
-    if (!ticking) {
-      requestAnimationFrame(updateParallax);
-      ticking = true;
-    }
   }, { passive: true });
 
-  // Initial call
-  updateParallax();
-
-  // 3. Subtitle Typewriter Rotator
+  // 5. Typewriter Effect for Hero Subtitle
   const typewriterText = document.getElementById('typewriter-text');
   if (typewriterText) {
     const phrases = [
-      "Full-Stack Engineer",
-      "Data Analytics Specialist",
-      "Machine Learning Developer",
-      "MySQL Optimization Expert"
+      "Data Analyst",
+      "Machine Learning Engineer",
+      "Python & SQL Specialist",
+      "Full-Stack Web Developer"
     ];
     let phraseIndex = 0;
     let charIndex = 0;
@@ -101,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let speed = isDeleting ? 35 : 75;
 
       if (!isDeleting && charIndex === currentPhrase.length) {
-        speed = 2200; // Pause at end of phrase
+        speed = 2200;
         isDeleting = true;
       } else if (isDeleting && charIndex === 0) {
         isDeleting = false;
@@ -114,10 +115,10 @@ document.addEventListener('DOMContentLoaded', () => {
     type();
   }
 
-  // 4. Staggered Intersection Observer Scroll Reveal
+  // 6. Staggered Intersection Observer Scroll Reveal Trigger
   const observerOptions = {
     root: null,
-    rootMargin: '0px 0px -80px 0px',
+    rootMargin: '0px 0px -60px 0px',
     threshold: 0.1
   };
 
@@ -127,25 +128,29 @@ document.addEventListener('DOMContentLoaded', () => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add('is-visible');
+
+        // Animate skill progress bars inside card if present
+        const progressBars = entry.target.querySelectorAll('.skill-progress-bar');
+        progressBars.forEach((bar) => {
+          const targetWidth = bar.style.width;
+          bar.style.width = '0%';
+          setTimeout(() => {
+            bar.style.width = targetWidth;
+          }, 200);
+        });
+
         observer.unobserve(entry.target);
       }
     });
   }, observerOptions);
 
-  revealElements.forEach((el, index) => {
-    // Add subtle stagger delay if element has siblings in a grid
-    if (el.parentElement && el.parentElement.classList.contains('projects-grid') || 
-        el.parentElement && el.parentElement.classList.contains('skills-grid') ||
-        el.parentElement && el.parentElement.classList.contains('services-grid')) {
-      const childIndex = Array.from(el.parentElement.children).indexOf(el);
-      el.style.transitionDelay = `${(childIndex % 4) * 0.1}s`;
-    }
+  revealElements.forEach((el) => {
     revealObserver.observe(el);
   });
 
-  // 5. 3D Card Physics & Cursor Spotlight
+  // 7. 3D Card Tilt & Mouse-Following Spotlight Glow
   if (!prefersReducedMotion) {
-    const tiltCards = document.querySelectorAll('.project-card, .service-card, .glass-card, .skill-card');
+    const tiltCards = document.querySelectorAll('.project-card, .service-card, .glass-card, .skill-card, .cert-card');
 
     tiltCards.forEach((card) => {
       card.addEventListener('mousemove', (e) => {
@@ -155,8 +160,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
 
-        const rotateX = ((y - centerY) / centerY) * -6; // max 6 deg
-        const rotateY = ((x - centerX) / centerX) * 6;  // max 6 deg
+        const rotateX = ((y - centerY) / centerY) * -6;
+        const rotateY = ((x - centerX) / centerX) * 6;
 
         card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translate3d(0, -4px, 0)`;
         card.style.setProperty('--mouse-x', `${x}px`);
@@ -169,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 6. Magnetic Button Physics
+  // 8. Magnetic Button Physics
   const magneticBtns = document.querySelectorAll('.magnetic-btn');
   magneticBtns.forEach((btn) => {
     btn.addEventListener('mousemove', (e) => {
@@ -184,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 7. Animated Counter Observer
+  // 9. Number Counter Animation
   const statNumbers = document.querySelectorAll('.stat-number');
   const countObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach((entry) => {
@@ -213,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   statNumbers.forEach((stat) => countObserver.observe(stat));
 
-  // 8. Active Section Navigation Observer
+  // 10. Active Navigation Section Observer
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-link');
 

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   MAIN STYLE SHEET - Portfolio PT
+   MAIN STYLE SHEET - Eklabay Mishra Portfolio
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -258,7 +258,7 @@ img {
 }
 
 /* --------------------------------------------------------------------------
-   4. Background Aurora Mesh & Particles (Kept Behind All Content)
+   4. Background Aurora Mesh & Particles
    -------------------------------------------------------------------------- */
 #particle-canvas {
   position: fixed;
@@ -312,7 +312,7 @@ img {
 }
 
 /* --------------------------------------------------------------------------
-   5. Header, Navigation & Theme Toggle Button
+   5. Header & Navigation (Auto-Hide on Scroll Down, Reveal on Scroll Up)
    -------------------------------------------------------------------------- */
 .header {
   position: fixed;
@@ -323,7 +323,8 @@ img {
   z-index: var(--z-header);
   display: flex;
   align-items: center;
-  transition: all var(--transition-normal);
+  transition: transform 0.4s var(--ease-out-expo), background-color 0.4s ease;
+  will-change: transform;
 }
 
 .header.scrolled {
@@ -510,11 +511,11 @@ img {
 }
 
 /* --------------------------------------------------------------------------
-   7. Hero Section & Arched HD Profile Card (Solid Opaque - NO Color Tint Overlay)
+   7. Hero Section (Full Screen 100vh Landing Screen)
    -------------------------------------------------------------------------- */
 .hero {
   min-height: 100vh;
-  padding-top: calc(var(--header-height) + 40px);
+  padding-top: calc(var(--header-height) + 20px);
   display: flex;
   align-items: center;
   position: relative;
@@ -610,7 +611,7 @@ img {
   letter-spacing: 0.5px;
 }
 
-/* SOLID OPAQUE ARCHED PROFILE CARD (NO BACKDROP BLUR OR BACKGROUND COLOR TINT) */
+/* OPAQUE DOME PROFILE CARD */
 .hero-image-wrapper {
   position: relative;
   display: flex;
@@ -624,10 +625,9 @@ img {
   height: 480px;
   border-radius: 190px 190px 36px 36px;
   padding: 6px;
-  background: #11131f; /* Solid dark background to prevent blue background tinting */
+  background: #11131f;
   border: 2px solid rgba(255, 255, 255, 0.18);
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75), 0 0 40px rgba(99, 102, 241, 0.25);
-  /* Removed backdrop-filter to eliminate background color tinting over photo */
 }
 
 .profile-img-container {
@@ -647,7 +647,7 @@ img {
   display: block;
   opacity: 1 !important;
   mix-blend-mode: normal !important;
-  filter: none !important; /* Pure untouched original photo colors */
+  filter: none !important;
   image-rendering: -webkit-optimize-contrast;
   transition: transform 0.6s var(--ease-out-expo);
   transform: translateZ(0);
@@ -818,7 +818,7 @@ img {
 }
 
 /* --------------------------------------------------------------------------
-   9. Skills & Tools Matrix
+   9. Skills Dashboard with Progress Bars
    -------------------------------------------------------------------------- */
 .skills-filter {
   display: flex;
@@ -849,7 +849,7 @@ img {
 
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 20px;
 }
 
@@ -892,8 +892,25 @@ img {
   letter-spacing: 0.5px;
 }
 
+.skill-progress-bg {
+  width: 100%;
+  height: 6px;
+  background: var(--border-color);
+  border-radius: 3px;
+  margin-top: 14px;
+  overflow: hidden;
+  position: relative;
+}
+
+.skill-progress-bar {
+  height: 100%;
+  background: var(--grad-aurora);
+  border-radius: 3px;
+  transition: width 1.2s var(--ease-out-expo);
+}
+
 /* --------------------------------------------------------------------------
-   10. Experience Timeline
+   10. Experience Vertical Animated Timeline
    -------------------------------------------------------------------------- */
 .timeline {
   position: relative;
@@ -1236,6 +1253,7 @@ img {
   align-items: center;
   gap: 16px;
   margin-top: 32px;
+  flex-wrap: wrap;
 }
 
 .btn-social {
