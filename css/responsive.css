@@ -162,4 +162,17 @@
   .modal-container {
     padding: 24px;
   }
+
+  .contact-card-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .contact-premium-card {
+    padding: 28px 20px;
+  }
+
+  .skills-category-card {
+    padding: 24px 18px;
+  }
 }
