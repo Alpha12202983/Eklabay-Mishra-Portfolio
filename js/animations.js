@@ -6,16 +6,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // 1. Initialize Lenis Smooth Scroll Engine (Fixed single RAF loop)
+  // 1. Initialize High-Speed Responsive Lenis Smooth Scroll Engine
   let lenis = null;
   if (typeof Lenis !== 'undefined' && !prefersReducedMotion) {
     try {
       lenis = new Lenis({
-        duration: 1.2,
+        duration: 0.7, // Reduced from 1.2 for faster response
+        lerp: 0.12, // Snappier interpolation
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         smoothWheel: true,
-        wheelMultiplier: 1,
-        touchMultiplier: 1.5
+        wheelMultiplier: 1.6, // Increased from 1.0 for quicker scroll distance
+        touchMultiplier: 2.0, // Responsive trackpad/touch scrolling
+        infinite: false
       });
 
       function raf(time) {
