@@ -304,24 +304,20 @@ document.addEventListener('DOMContentLoaded', () => {
     if (chalEl) chalEl.textContent = data.challenges;
     if (solEl) solEl.textContent = data.solution;
     if (gitEl) {
-      const githubUrl = data.github || 'https://github.com/eklabay-mishra/Quizverse';
-      gitEl.href = githubUrl;
+      gitEl.href = data.github || 'https://github.com/eklabay-mishra/Quizverse';
+      gitEl.target = '_blank';
+      gitEl.rel = 'noopener noreferrer';
       gitEl.style.display = 'inline-flex';
-      gitEl.onclick = (e) => {
-        e.stopPropagation();
-        window.open(githubUrl, '_blank');
-      };
+      gitEl.onclick = null;
     }
     
     if (demoEl) {
       if (data.demo && data.demo !== '#' && data.demo !== '') {
-        const demoUrl = data.demo;
-        demoEl.href = demoUrl;
+        demoEl.href = data.demo;
+        demoEl.target = '_blank';
+        demoEl.rel = 'noopener noreferrer';
         demoEl.style.display = 'inline-flex';
-        demoEl.onclick = (e) => {
-          e.stopPropagation();
-          window.open(demoUrl, '_blank');
-        };
+        demoEl.onclick = null;
       } else {
         demoEl.style.display = 'none';
       }
