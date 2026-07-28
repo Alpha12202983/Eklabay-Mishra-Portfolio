@@ -37,7 +37,7 @@ const PROJECTS_DATA = {
     ],
     challenges: "Eliminating SQL injection vulnerabilities, maintaining real-time dashboard analytics charts, and handling live tab switch events reliably across browsers.",
     solution: "Implemented PDO prepared statements throughout all backend modules, structured clean MVC controllers, and hosted live application instance on Render cloud.",
-    github: "https://github.com/Alpha12202983",
+    github: "https://github.com/eklabay-mishra/Quizverse",
     demo: "https://quizverse-yx85.onrender.com"
   },
   taskflow: {
@@ -55,8 +55,8 @@ const PROJECTS_DATA = {
     ],
     challenges: "Managing state consistency for multi-step candidate application pipelines across different user roles.",
     solution: "Structured clean MVC controllers and utilized AJAX asynchronous polling with JSON API responses.",
-    github: "https://github.com/Alpha12202983",
-    demo: "https://github.com/Alpha12202983"
+    github: "https://github.com/eklabay-mishra/Hospital-management-system",
+    demo: "https://github.com/eklabay-mishra"
   },
   camera: {
     title: "All-Encompassing OpenCV Camera Application",
@@ -72,8 +72,8 @@ const PROJECTS_DATA = {
     ],
     challenges: "Maintaining high video frame rates (30+ FPS) while running complex spatial filtering transformations.",
     solution: "Downsampled frame resolution during motion detection sweeps and leveraged optimized NumPy vectorized operations.",
-    github: "https://github.com/Alpha12202983",
-    demo: "https://github.com/Alpha12202983"
+    github: "https://github.com/eklabay-mishra",
+    demo: "https://github.com/eklabay-mishra"
   },
   patient: {
     title: "Patient Risk Healthcare Dashboard",
@@ -89,8 +89,8 @@ const PROJECTS_DATA = {
     ],
     challenges: "Merging heterogeneous patient data schema formats while maintaining patient privacy and data integrity.",
     solution: "Constructed an ETL data pipeline in Python with robust data cleaning and standardization rules before Tableau ingest.",
-    github: "https://github.com/Alpha12202983",
-    demo: "https://github.com/Alpha12202983"
+    github: "https://github.com/eklabay-mishra",
+    demo: "https://github.com/eklabay-mishra"
   },
   segmentation: {
     title: "Customer Segmentation System in R",
@@ -106,8 +106,8 @@ const PROJECTS_DATA = {
     ],
     challenges: "Determining the optimal cluster count (K) without overfitting demographic variance.",
     solution: "Used the Elbow Method and Silhouette Analysis metrics inside the Shiny app to guide optimal cluster selection.",
-    github: "https://github.com/Alpha12202983",
-    demo: "https://github.com/Alpha12202983"
+    github: "https://github.com/eklabay-mishra/Cluster_Bank_Customer_Churn_Prediction_Using_PySpark",
+    demo: "https://github.com/eklabay-mishra"
   }
 };
 
@@ -304,7 +304,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (chalEl) chalEl.textContent = data.challenges;
     if (solEl) solEl.textContent = data.solution;
     if (gitEl) {
-      const githubUrl = data.github || 'https://github.com/Alpha12202983';
+      const githubUrl = data.github || 'https://github.com/eklabay-mishra/Quizverse';
       gitEl.href = githubUrl;
       gitEl.style.display = 'inline-flex';
       gitEl.onclick = (e) => {
