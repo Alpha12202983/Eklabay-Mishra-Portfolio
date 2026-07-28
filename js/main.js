@@ -37,7 +37,7 @@ const PROJECTS_DATA = {
     ],
     challenges: "Eliminating SQL injection vulnerabilities, maintaining real-time dashboard analytics charts, and handling live tab switch events reliably across browsers.",
     solution: "Implemented PDO prepared statements throughout all backend modules, structured clean MVC controllers, and hosted live application instance on Render cloud.",
-    github: "https://github.com/Alpha12202983/QuizVerse",
+    github: "https://github.com/Alpha12202983",
     demo: "https://quizverse-yx85.onrender.com"
   },
   taskflow: {
