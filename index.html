@@ -187,7 +187,7 @@
 
             <div class="hero-stats reveal-on-scroll">
               
-              <div class="stat-card">
+              <div class="stat-card" data-scroll-to="projects">
                 <div class="stat-icon-box">
                   <i data-lucide="folder-git-2" style="width: 22px; height: 22px;"></i>
                 </div>
@@ -197,7 +197,7 @@
                 </div>
               </div>
 
-              <div class="stat-card">
+              <div class="stat-card" data-scroll-to="certificates">
                 <div class="stat-icon-box" style="background: rgba(168, 85, 247, 0.12); color: var(--accent-purple); border-color: rgba(168, 85, 247, 0.3);">
                   <i data-lucide="award" style="width: 22px; height: 22px;"></i>
                 </div>
@@ -207,7 +207,7 @@
                 </div>
               </div>
 
-              <div class="stat-card">
+              <div class="stat-card" data-scroll-to="experience">
                 <div class="stat-icon-box" style="background: rgba(6, 182, 212, 0.12); color: var(--accent-cyan); border-color: rgba(6, 182, 212, 0.3);">
                   <i data-lucide="building-2" style="width: 22px; height: 22px;"></i>
                 </div>
@@ -1153,7 +1153,7 @@
         <div class="services-grid">
           
           <!-- Service Card 1: Data Analysis -->
-          <div class="service-card reveal-on-scroll" data-service-key="analytics">
+          <div class="service-card reveal-on-scroll" data-service-key="analytics" tabindex="0" role="button" aria-expanded="false">
             <div>
               <div class="service-icon-box">
                 <i data-lucide="bar-chart-3"></i>
@@ -1168,6 +1168,31 @@
                 <span class="service-pill">Apache Spark</span>
                 <span class="service-pill">KPI Dashboards</span>
               </div>
+
+              <!-- Expandable Inline Offerings List -->
+              <div class="service-expandable-content">
+                <h4 style="font-family: var(--font-heading); font-size: 1.05rem; margin-bottom: 12px; color: var(--accent-cyan);">All 18 Analytics & BI Capabilities:</h4>
+                <div class="service-items-grid">
+                  <div class="service-item-chip"><i data-lucide="check-circle-2"></i><span>Data Cleaning & Preprocessing</span></div>
+                  <div class="service-item-chip"><i data-lucide="check-circle-2"></i><span>Excel Dashboard Creation</span></div>
+                  <div class="service-item-chip"><i data-lucide="check-circle-2"></i><span>Power BI Dashboard Development</span></div>
+                  <div class="service-item-chip"><i data-lucide="check-circle-2"></i><span>SQL Data Analysis & Query Optimization</span></div>
+                  <div class="service-item-chip"><i data-lucide="check-circle-2"></i><span>Business Reporting & Executive Insights</span></div>
+                  <div class="service-item-chip"><i data-lucide="check-circle-2"></i><span>Data Visualization & Interactive Charts</span></div>
+                  <div class="service-item-chip"><i data-lucide="check-circle-2"></i><span>Exploratory Data Analysis (EDA)</span></div>
+                  <div class="service-item-chip"><i data-lucide="check-circle-2"></i><span>Predictive Analysis & Statistical Modeling</span></div>
+                  <div class="service-item-chip"><i data-lucide="check-circle-2"></i><span>Data Entry & Automated Formatting</span></div>
+                  <div class="service-item-chip"><i data-lucide="check-circle-2"></i><span>Business Intelligence (BI) Analysis</span></div>
+                  <div class="service-item-chip"><i data-lucide="check-circle-2"></i><span>KPI Tracking & Metric Dashboards</span></div>
+                  <div class="service-item-chip"><i data-lucide="check-circle-2"></i><span>Data Pipeline Automation</span></div>
+                  <div class="service-item-chip"><i data-lucide="check-circle-2"></i><span>Data Migration & ETL Workflows</span></div>
+                  <div class="service-item-chip"><i data-lucide="check-circle-2"></i><span>Market Research & Trend Analysis</span></div>
+                  <div class="service-item-chip"><i data-lucide="check-circle-2"></i><span>Survey Data Analysis & Cohort Studies</span></div>
+                  <div class="service-item-chip"><i data-lucide="check-circle-2"></i><span>Python Data Analysis (Pandas & NumPy)</span></div>
+                  <div class="service-item-chip"><i data-lucide="check-circle-2"></i><span>Apache Spark / Big Data Analysis</span></div>
+                  <div class="service-item-chip"><i data-lucide="check-circle-2"></i><span>Machine Learning Analytics</span></div>
+                </div>
+              </div>
             </div>
 
             <div class="service-action-btn">
@@ -1177,7 +1202,7 @@
           </div>
 
           <!-- Service Card 2: Software & ML Developer -->
-          <div class="service-card reveal-on-scroll" data-service-key="software">
+          <div class="service-card reveal-on-scroll" data-service-key="software" tabindex="0" role="button" aria-expanded="false">
             <div>
               <div class="service-icon-box">
                 <i data-lucide="code"></i>
@@ -1191,6 +1216,23 @@
                 <span class="service-pill">Database Design</span>
                 <span class="service-pill">REST APIs</span>
                 <span class="service-pill">Cloud Deployments</span>
+              </div>
+
+              <!-- Expandable Inline Offerings List -->
+              <div class="service-expandable-content">
+                <h4 style="font-family: var(--font-heading); font-size: 1.05rem; margin-bottom: 12px; color: var(--accent-indigo);">All 10 Software & ML Capabilities:</h4>
+                <div class="service-items-grid">
+                  <div class="service-item-chip"><i data-lucide="check-circle-2"></i><span>Website Development & Custom Portals</span></div>
+                  <div class="service-item-chip"><i data-lucide="check-circle-2"></i><span>Web Application Development</span></div>
+                  <div class="service-item-chip"><i data-lucide="check-circle-2"></i><span>Frontend Development (React, ES6+, CSS3)</span></div>
+                  <div class="service-item-chip"><i data-lucide="check-circle-2"></i><span>Backend Development (PHP, Node.js, Python)</span></div>
+                  <div class="service-item-chip"><i data-lucide="check-circle-2"></i><span>Full Stack Development & MVC</span></div>
+                  <div class="service-item-chip"><i data-lucide="check-circle-2"></i><span>API Development & RESTful Integration</span></div>
+                  <div class="service-item-chip"><i data-lucide="check-circle-2"></i><span>Database Design & Indexing (MySQL, SSMS)</span></div>
+                  <div class="service-item-chip"><i data-lucide="check-circle-2"></i><span>Software Maintenance & Bug Fixing</span></div>
+                  <div class="service-item-chip"><i data-lucide="check-circle-2"></i><span>Authentication, RBAC & Security</span></div>
+                  <div class="service-item-chip"><i data-lucide="check-circle-2"></i><span>Website Deployment & Cloud Hosting</span></div>
+                </div>
               </div>
             </div>
 

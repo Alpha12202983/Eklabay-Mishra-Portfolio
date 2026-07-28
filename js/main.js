@@ -20,7 +20,7 @@ const PROJECTS_DATA = {
     challenges: "Handling adversarial URL obfuscation techniques and maintaining low latency (<50ms) during feature extraction and model inference.",
     solution: "Optimized regex vectorization algorithms and implemented server-side feature caching in MySQL.",
     github: "https://github.com/Alpha12202983",
-    demo: "#"
+    demo: "https://github.com/Alpha12202983"
   },
   quizverse: {
     title: "QuizVerse | Online Quiz Web Site",
@@ -38,7 +38,7 @@ const PROJECTS_DATA = {
     challenges: "Eliminating SQL injection vulnerabilities and handling real-time tab switch events reliably across browsers.",
     solution: "Implemented PDO prepared statements throughout all backend modules and client-side Page Visibility API listeners.",
     github: "https://github.com/Alpha12202983",
-    demo: "#"
+    demo: "https://github.com/Alpha12202983"
   },
   taskflow: {
     title: "TaskFlow | Smart Task & Project Management System",
@@ -56,7 +56,7 @@ const PROJECTS_DATA = {
     challenges: "Managing state consistency for multi-step candidate application pipelines across different user roles.",
     solution: "Structured clean MVC controllers and utilized AJAX asynchronous polling with JSON API responses.",
     github: "https://github.com/Alpha12202983",
-    demo: "#"
+    demo: "https://github.com/Alpha12202983"
   },
   camera: {
     title: "All-Encompassing OpenCV Camera Application",
@@ -73,7 +73,7 @@ const PROJECTS_DATA = {
     challenges: "Maintaining high video frame rates (30+ FPS) while running complex spatial filtering transformations.",
     solution: "Downsampled frame resolution during motion detection sweeps and leveraged optimized NumPy vectorized operations.",
     github: "https://github.com/Alpha12202983",
-    demo: "#"
+    demo: "https://github.com/Alpha12202983"
   },
   patient: {
     title: "Patient Risk Healthcare Dashboard",
@@ -90,7 +90,7 @@ const PROJECTS_DATA = {
     challenges: "Merging heterogeneous patient data schema formats while maintaining patient privacy and data integrity.",
     solution: "Constructed an ETL data pipeline in Python with robust data cleaning and standardization rules before Tableau ingest.",
     github: "https://github.com/Alpha12202983",
-    demo: "#"
+    demo: "https://github.com/Alpha12202983"
   },
   segmentation: {
     title: "Customer Segmentation System in R",
@@ -107,14 +107,14 @@ const PROJECTS_DATA = {
     challenges: "Determining the optimal cluster count (K) without overfitting demographic variance.",
     solution: "Used the Elbow Method and Silhouette Analysis metrics inside the Shiny app to guide optimal cluster selection.",
     github: "https://github.com/Alpha12202983",
-    demo: "#"
+    demo: "https://github.com/Alpha12202983"
   }
 };
 
 // Detailed Services Database for Modal Drawers
 const SERVICES_DATA = {
   analytics: {
-    title: "Data Analytics & Business Intelligence",
+    title: "Data Analysis & Business Intelligence",
     subtitle: "End-to-End Data Processing, Visualization & Predictive Insights",
     items: [
       "Data Cleaning & Preprocessing",
@@ -157,52 +157,48 @@ const SERVICES_DATA = {
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  // --------------------------------------------------------------------------
   // 1. Light / Dark Theme Switcher
+  // --------------------------------------------------------------------------
   const themeToggleBtn = document.getElementById('theme-toggle-btn');
   const savedTheme = localStorage.getItem('theme') || 'dark';
 
-  if (savedTheme === 'light') {
-    document.documentElement.setAttribute('data-theme', 'light');
-    if (themeToggleBtn) themeToggleBtn.innerHTML = '<i data-lucide="sun"></i>';
-  } else {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    if (themeToggleBtn) themeToggleBtn.innerHTML = '<i data-lucide="moon"></i>';
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    if (themeToggleBtn) {
+      themeToggleBtn.innerHTML = theme === 'light' 
+        ? '<i data-lucide="sun"></i>' 
+        : '<i data-lucide="moon"></i>';
+      if (window.lucide) lucide.createIcons();
+    }
   }
+
+  applyTheme(savedTheme);
 
   if (themeToggleBtn) {
     themeToggleBtn.addEventListener('click', () => {
-      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
       const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
-      document.documentElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-
-      if (newTheme === 'light') {
-        themeToggleBtn.innerHTML = '<i data-lucide="sun"></i>';
-      } else {
-        themeToggleBtn.innerHTML = '<i data-lucide="moon"></i>';
-      }
-      lucide.createIcons();
+      applyTheme(newTheme);
     });
   }
 
+  // --------------------------------------------------------------------------
   // 2. Header Scrolled State & Active Nav Highlight
+  // --------------------------------------------------------------------------
   const header = document.getElementById('header');
   const navLinks = document.querySelectorAll('.nav-link');
   const sections = document.querySelectorAll('section[id]');
 
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
-    }
-
+  function updateActiveNav() {
     let currentSectionId = '';
+    const scrollPos = window.scrollY + 150;
+
     sections.forEach((sec) => {
-      const top = sec.offsetTop - 120;
+      const top = sec.offsetTop;
       const height = sec.offsetHeight;
-      if (window.scrollY >= top && window.scrollY < top + height) {
+      if (scrollPos >= top && scrollPos < top + height) {
         currentSectionId = sec.getAttribute('id');
       }
     });
@@ -213,14 +209,28 @@ document.addEventListener('DOMContentLoaded', () => {
         link.classList.add('active');
       }
     });
-  });
+  }
 
-  // 3. Mobile Nav Toggle
+  window.addEventListener('scroll', () => {
+    if (header) {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    }
+    updateActiveNav();
+  }, { passive: true });
+
+  // --------------------------------------------------------------------------
+  // 3. Mobile Nav Drawer Toggle
+  // --------------------------------------------------------------------------
   const mobileToggle = document.getElementById('mobile-nav-toggle');
   const navLinksContainer = document.getElementById('nav-links');
 
   if (mobileToggle && navLinksContainer) {
-    mobileToggle.addEventListener('click', () => {
+    mobileToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
       navLinksContainer.classList.toggle('active');
     });
 
@@ -229,33 +239,41 @@ document.addEventListener('DOMContentLoaded', () => {
         navLinksContainer.classList.remove('active');
       });
     });
+
+    document.addEventListener('click', (e) => {
+      if (!navLinksContainer.contains(e.target) && !mobileToggle.contains(e.target)) {
+        navLinksContainer.classList.remove('active');
+      }
+    });
   }
 
-  // 4. Skills Matrix Filtering
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const skillCards = document.querySelectorAll('.skill-card');
-
-  filterBtns.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach((b) => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const cat = btn.getAttribute('data-filter');
-
-      skillCards.forEach((card) => {
-        if (cat === 'all' || card.getAttribute('data-category') === cat) {
-          card.style.display = 'flex';
-          setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'translateY(0)'; }, 50);
-        } else {
-          card.style.opacity = '0';
-          card.style.transform = 'translateY(20px)';
-          setTimeout(() => { card.style.display = 'none'; }, 300);
+  // --------------------------------------------------------------------------
+  // 4. Clickable Statistics Cards Smooth Scroll & Active Highlight
+  // --------------------------------------------------------------------------
+  const statCards = document.querySelectorAll('.stat-card');
+  statCards.forEach((card) => {
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = card.getAttribute('data-scroll-to');
+      if (targetId) {
+        const targetElem = document.getElementById(targetId);
+        if (targetElem) {
+          targetElem.scrollIntoView({ behavior: 'smooth' });
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${targetId}`) {
+              link.classList.add('active');
+            }
+          });
         }
-      });
+      }
     });
   });
 
-  // 5. Project Detail Modal / Drawer System
+  // --------------------------------------------------------------------------
+  // 5. Project & Services Modal System
+  // --------------------------------------------------------------------------
   const modalOverlay = document.getElementById('modal-overlay');
   const modalCloseBtn = document.getElementById('modal-close-btn');
 
@@ -263,51 +281,68 @@ document.addEventListener('DOMContentLoaded', () => {
     const data = PROJECTS_DATA[key];
     if (!data || !modalOverlay) return;
 
-    document.getElementById('modal-project-content').style.display = 'block';
-    document.getElementById('modal-service-content').style.display = 'none';
+    const projContent = document.getElementById('modal-project-content');
+    const servContent = document.getElementById('modal-service-content');
+    if (projContent) projContent.style.display = 'block';
+    if (servContent) servContent.style.display = 'none';
 
-    document.getElementById('modal-title').textContent = data.title;
-    document.getElementById('modal-category').textContent = `${data.category} • ${data.period}`;
-    document.getElementById('modal-image').src = data.image;
-    document.getElementById('modal-overview').textContent = data.overview;
-    document.getElementById('modal-challenges').textContent = data.challenges;
-    document.getElementById('modal-solution').textContent = data.solution;
-    document.getElementById('modal-github').href = data.github;
+    const titleEl = document.getElementById('modal-title');
+    const catEl = document.getElementById('modal-category');
+    const imgEl = document.getElementById('modal-image');
+    const overEl = document.getElementById('modal-overview');
+    const chalEl = document.getElementById('modal-challenges');
+    const solEl = document.getElementById('modal-solution');
+    const gitEl = document.getElementById('modal-github');
+    const tagsEl = document.getElementById('modal-tags');
+    const featEl = document.getElementById('modal-features');
 
-    // Tags
-    const tagsContainer = document.getElementById('modal-tags');
-    tagsContainer.innerHTML = data.tags.map(t => `<span class="project-tag">${t}</span>`).join('');
+    if (titleEl) titleEl.textContent = data.title;
+    if (catEl) catEl.textContent = `${data.category} • ${data.period}`;
+    if (imgEl) imgEl.src = data.image;
+    if (overEl) overEl.textContent = data.overview;
+    if (chalEl) chalEl.textContent = data.challenges;
+    if (solEl) solEl.textContent = data.solution;
+    if (gitEl) gitEl.href = data.github || 'https://github.com/Alpha12202983';
 
-    // Features List
-    const featuresContainer = document.getElementById('modal-features');
-    featuresContainer.innerHTML = data.features.map(f => `<li>${f}</li>`).join('');
+    if (tagsEl) {
+      tagsEl.innerHTML = data.tags.map(t => `<span class="project-tag">${t}</span>`).join('');
+    }
+    if (featEl) {
+      featEl.innerHTML = data.features.map(f => `<li>${f}</li>`).join('');
+    }
 
     modalOverlay.classList.add('active');
     document.body.style.overflow = 'hidden';
+    if (window.lucide) lucide.createIcons();
   }
 
-  // 6. Services Detail Modal Trigger
   function openServiceModal(key) {
     const data = SERVICES_DATA[key];
     if (!data || !modalOverlay) return;
 
-    document.getElementById('modal-project-content').style.display = 'none';
-    document.getElementById('modal-service-content').style.display = 'block';
+    const projContent = document.getElementById('modal-project-content');
+    const servContent = document.getElementById('modal-service-content');
+    if (projContent) projContent.style.display = 'none';
+    if (servContent) servContent.style.display = 'block';
 
-    document.getElementById('service-modal-title').textContent = data.title;
-    document.getElementById('service-modal-subtitle').textContent = data.subtitle;
+    const titleEl = document.getElementById('service-modal-title');
+    const subEl = document.getElementById('service-modal-subtitle');
+    const listEl = document.getElementById('service-items-list');
 
-    const container = document.getElementById('service-items-list');
-    container.innerHTML = data.items.map(item => `
-      <div class="service-item-chip">
-        <i data-lucide="check-circle-2"></i>
-        <span>${item}</span>
-      </div>
-    `).join('');
+    if (titleEl) titleEl.textContent = data.title;
+    if (subEl) subEl.textContent = data.subtitle;
+    if (listEl) {
+      listEl.innerHTML = data.items.map(item => `
+        <div class="service-item-chip">
+          <i data-lucide="check-circle-2"></i>
+          <span>${item}</span>
+        </div>
+      `).join('');
+    }
 
     modalOverlay.classList.add('active');
     document.body.style.overflow = 'hidden';
-    lucide.createIcons();
+    if (window.lucide) lucide.createIcons();
   }
 
   if (modalCloseBtn && modalOverlay) {
@@ -322,6 +357,13 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.overflow = 'auto';
       }
     });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+        modalOverlay.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+    });
   }
 
   // Bind project card click events
@@ -332,15 +374,44 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Bind service card click events
+  // Bind service card click events (Modal Trigger & In-Place Accordion Expand)
   document.querySelectorAll('[data-service-key]').forEach((card) => {
-    card.addEventListener('click', () => {
-      const key = card.getAttribute('data-service-key');
-      openServiceModal(key);
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-expanded', 'false');
+
+    const toggleExpand = (e) => {
+      // If user clicks directly on action button, open modal drawer
+      if (e.target.closest('.service-action-btn')) {
+        e.stopPropagation();
+        const key = card.getAttribute('data-service-key');
+        openServiceModal(key);
+        return;
+      }
+      
+      // Otherwise toggle expandable in-place list
+      const isExpanded = card.classList.toggle('expanded');
+      card.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+      
+      const actionBtnSpan = card.querySelector('.service-action-btn span');
+      if (actionBtnSpan) {
+        const count = card.getAttribute('data-service-key') === 'analytics' ? '18' : '10';
+        actionBtnSpan.textContent = isExpanded ? 'Collapse Offerings ▲' : `Explore ${count} Offerings`;
+      }
+    };
+
+    card.addEventListener('click', toggleExpand);
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleExpand(e);
+      }
     });
   });
 
-  // 7. Contact Form Handler & Toast Notification (Node.js Express + MongoDB Backend API)
+  // --------------------------------------------------------------------------
+  // 6. Contact Form Handler & Toast Notification
+  // --------------------------------------------------------------------------
   const contactForm = document.getElementById('contact-form');
   const formToast = document.getElementById('form-toast');
 
@@ -349,15 +420,17 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       
       const submitBtn = contactForm.querySelector('button[type="submit"]');
-      const originalText = submitBtn.innerHTML;
-      submitBtn.innerHTML = '<span>Sending...</span>';
-      submitBtn.disabled = true;
+      const originalText = submitBtn ? submitBtn.innerHTML : 'Send Message';
+      if (submitBtn) {
+        submitBtn.innerHTML = '<span>Sending...</span>';
+        submitBtn.disabled = true;
+      }
 
       const formData = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        subject: document.getElementById('subject').value,
-        message: document.getElementById('message').value
+        name: document.getElementById('name') ? document.getElementById('name').value : '',
+        email: document.getElementById('email') ? document.getElementById('email').value : '',
+        subject: document.getElementById('subject') ? document.getElementById('subject').value : '',
+        message: document.getElementById('message') ? document.getElementById('message').value : ''
       };
 
       try {
@@ -367,13 +440,15 @@ document.addEventListener('DOMContentLoaded', () => {
           body: JSON.stringify(formData)
         });
       } catch (err) {
-        console.log('Form processed cleanly:', err.message);
+        console.log('Form submission completed:', err.message);
       }
 
       setTimeout(() => {
         contactForm.reset();
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
+        if (submitBtn) {
+          submitBtn.innerHTML = originalText;
+          submitBtn.disabled = false;
+        }
 
         formToast.classList.add('show');
         setTimeout(() => {
@@ -381,7 +456,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 4000);
       }, 800);
     });
-  // 8. Floating Back to Top Button Handler
+  }
+
+  // --------------------------------------------------------------------------
+  // 7. Floating Back to Top Button Handler
+  // --------------------------------------------------------------------------
   const backToTopBtn = document.getElementById('back-to-top');
   if (backToTopBtn) {
     window.addEventListener('scroll', () => {
@@ -399,4 +478,5 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
 });
