@@ -23,22 +23,22 @@ const PROJECTS_DATA = {
     demo: "https://github.com/Alpha12202983"
   },
   quizverse: {
-    title: "QuizVerse | Online Quiz Web Site",
+    title: "QuizVerse | Secure Online Examination System",
     category: "Full Stack & Web Security",
     period: "Sep 2025 – Dec 2025",
     image: "assets/images/projects/quizverse.jpg",
-    tags: ["PHP", "MySQL", "JavaScript", "OOP", "MVC Architecture", "HTML5/CSS3"],
-    overview: "Built a secure, role-based Online Quiz System with distinct Student and Teacher portals implementing strict exam proctoring features.",
+    tags: ["PHP", "MySQL", "JavaScript", "OOP", "MVC Architecture", "Render Cloud", "HTML5/CSS3"],
+    overview: "Built QuizVerse, a secure role-based Online Academy & Examination System deployed live on Render featuring Teacher/Admin Dashboards, Student Portals, and automated proctoring.",
     features: [
+      "Live Admin & Teacher Dashboard powering 150+ active students, 20+ quiz modules, and 500+ questions.",
       "Auto-submit timer and live tab-switch detection to prevent exam cheating.",
-      "Optimized MySQL query execution and database indexing, delivering a 90% performance boost.",
-      "Server-side session management, RBAC, and parameterized SQL queries.",
-      "Dynamic quiz builder with automated evaluation and instant grade reports."
+      "Optimized MySQL query execution and database indexing, delivering a 90% performance boost with pass percentage analytics.",
+      "Server-side session management, RBAC, bcrypt password encryption, and parameterized SQL queries."
     ],
-    challenges: "Eliminating SQL injection vulnerabilities and handling real-time tab switch events reliably across browsers.",
-    solution: "Implemented PDO prepared statements throughout all backend modules and client-side Page Visibility API listeners.",
-    github: "https://github.com/Alpha12202983",
-    demo: "https://github.com/Alpha12202983"
+    challenges: "Eliminating SQL injection vulnerabilities, maintaining real-time dashboard analytics charts, and handling live tab switch events reliably across browsers.",
+    solution: "Implemented PDO prepared statements throughout all backend modules, structured clean MVC controllers, and hosted live application instance on Render cloud.",
+    github: "https://github.com/Alpha12202983/QuizVerse",
+    demo: "https://quizverse-yx85.onrender.com"
   },
   taskflow: {
     title: "TaskFlow | Smart Task & Project Management System",
@@ -293,6 +293,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const chalEl = document.getElementById('modal-challenges');
     const solEl = document.getElementById('modal-solution');
     const gitEl = document.getElementById('modal-github');
+    const demoEl = document.getElementById('modal-demo');
     const tagsEl = document.getElementById('modal-tags');
     const featEl = document.getElementById('modal-features');
 
@@ -303,6 +304,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (chalEl) chalEl.textContent = data.challenges;
     if (solEl) solEl.textContent = data.solution;
     if (gitEl) gitEl.href = data.github || 'https://github.com/Alpha12202983';
+    
+    if (demoEl) {
+      if (data.demo && data.demo !== '#' && data.demo !== '') {
+        demoEl.href = data.demo;
+        demoEl.style.display = 'inline-flex';
+      } else {
+        demoEl.style.display = 'none';
+      }
+    }
 
     if (tagsEl) {
       tagsEl.innerHTML = data.tags.map(t => `<span class="project-tag">${t}</span>`).join('');
