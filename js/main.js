@@ -303,12 +303,25 @@ document.addEventListener('DOMContentLoaded', () => {
     if (overEl) overEl.textContent = data.overview;
     if (chalEl) chalEl.textContent = data.challenges;
     if (solEl) solEl.textContent = data.solution;
-    if (gitEl) gitEl.href = data.github || 'https://github.com/Alpha12202983';
+    if (gitEl) {
+      const githubUrl = data.github || 'https://github.com/Alpha12202983';
+      gitEl.href = githubUrl;
+      gitEl.style.display = 'inline-flex';
+      gitEl.onclick = (e) => {
+        e.stopPropagation();
+        window.open(githubUrl, '_blank');
+      };
+    }
     
     if (demoEl) {
       if (data.demo && data.demo !== '#' && data.demo !== '') {
-        demoEl.href = data.demo;
+        const demoUrl = data.demo;
+        demoEl.href = demoUrl;
         demoEl.style.display = 'inline-flex';
+        demoEl.onclick = (e) => {
+          e.stopPropagation();
+          window.open(demoUrl, '_blank');
+        };
       } else {
         demoEl.style.display = 'none';
       }
