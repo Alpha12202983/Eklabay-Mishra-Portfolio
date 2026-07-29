@@ -4,6 +4,24 @@
 
 // Detailed Project Database for Modal Drawers
 const PROJECTS_DATA = {
+  interviewai: {
+    title: "InterviewAI | Recruiter Enterprise SaaS Platform",
+    category: "AI & Full Stack SaaS",
+    period: "Jan 2026 – Present",
+    image: "assets/images/projects/interviewai.jpg",
+    tags: ["Python", "Flask", "AI / ML", "SQL", "SaaS", "JavaScript", "REST API"],
+    overview: "Built InterviewAI, an enterprise recruiter SaaS platform empowering organizations to automate technical assessments, rank candidates with ATS resume scoring, conduct AI interviews, and monitor live recruitment analytics.",
+    features: [
+      "Interactive Recruiter Dashboard with live candidate pool management (100+ candidates), active interview tracking, and 79.2 ATS score quality metrics.",
+      "Candidate Leaderboard & Assessment Matrix sorting talent by resume fit, skill test scores, and experience levels.",
+      "Recruiter Quick Launch suite for creating technical jobs, MCQ skill tests, candidate shortlisting, and PDF/CSV executive report exports.",
+      "Real-time recruitment activity feed and dynamic analytics charts for interview trends, department performance, and skill distributions."
+    ],
+    challenges: "Aggregating multi-dimensional candidate evaluation data (ATS scores, MCQ results, live interview metrics) while maintaining real-time dashboard responsiveness.",
+    solution: "Architected modular Flask REST API services, engineered database query aggregations, and built responsive dark-theme glassmorphism UI components.",
+    github: "https://github.com/eklabay-mishra/InterviewAI",
+    demo: "https://github.com/eklabay-mishra/InterviewAI"
+  },
   phishing: {
     title: "AI-Based Phishing URL Detection System",
     category: "Machine Learning & Security",
